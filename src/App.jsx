@@ -1,12 +1,13 @@
 import { ThemeProvider } from "styled-components"
 import { GlobalStyle } from "./styles/global"
 import { defaultTheme } from "./styles/themes/default"
+import { LargeButton } from "./components/LargeButton"
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <h1>asd</h1>
+      <LargeButton />
     </ThemeProvider>
   )
 }
