@@ -1,8 +1,8 @@
 import { styled } from "styled-components"
-import { BsArrowRight } from "react-icons/bs"
 
 const Button = styled.button`
-    background-color: ${props => props.theme['primary-50']};
+    background-color: ${(props) => props.config == 'primary' ? props.theme['primary-50'] : props.theme['white-0']};
+    color: ${(props) => props.config == 'primary' ? props.theme['white-0'] : props.theme['primary-30']};
     border: 0;
     border-radius: 10px;
     padding: 1rem 2rem;
@@ -11,24 +11,22 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
     transition: background ease-in-out 0.2s;
-
-    &:hover {
-        background-color: ${props => props.theme['primary-60']};
-    }
-`
-
-const Text = styled.span`
-    color: ${props => props.theme['white-0']};
+    cursor: pointer;
     font-weight: 600;
     font-size: 1rem;
     line-height: 140%;
+
+    &:hover {
+        background-color: ${props => props.theme['primary-60']};
+        color: ${props => props.theme['white-0']};
+    }
 `
 
-export function LargeButton() {
+export function LargeButton({text, icon, config}) {
     return (
-        <Button>
-            <Text>Placeholder</Text>
-            <BsArrowRight width={16} height={16} color="white" style={{stroke: 'white', strokeWidth: '1'}} />
+        <Button config={config}>
+            {text}
+            {icon && icon}
         </Button>
     )
 }
