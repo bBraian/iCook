@@ -18,7 +18,7 @@ export const Title = styled.h1`
     font-weight: 600;
     line-height: 48px;
     word-wrap: break-word;
-    margin-bottom: 120px;
+    margin-bottom: 68px;
 `;
 
 export const Label = styled.label`
@@ -35,6 +35,7 @@ export const Label = styled.label`
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: 400px;
 `;
 
@@ -56,6 +57,38 @@ export const Input = styled.input`
   line-height: 20px;
   word-wrap: break-word;
 `;
+
+export const ImgButton = styled.button`
+  margin-top: 38px;
+  width: 85px;
+  height: 85px;
+  background-color: ${props => props.theme['white-0']};
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+`
+
+export const Img = styled.img`
+  margin-top: 38px;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const ImgLabel = styled.label`
+  color: ${props => props.theme['white-0']};
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 7px;
+`
 
 export const ForgotPassword = styled.a`
   color: ${props => props.theme['white-0']};

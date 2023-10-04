@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     display: flex;
@@ -71,7 +72,7 @@ export const ForgotPassword = styled.a`
   justify-content: end;
 `;
 
-export const SignUpLink = styled.a`
+export const SignUpLink = styled(Link)`
   color: ${props => props.theme['white-0']};
   margin-top: 9px;
   text-align: center;

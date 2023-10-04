@@ -22,9 +22,9 @@ const Button = styled.button`
     }
 `
 
-export function LargeButton({text, icon, config}) {
+export function LargeButton({text, icon, config, ...rest}) {
     return (
-        <Button config={config}>
+        <Button config={config} {...rest}>
             {text}
             {icon && icon}
         </Button>

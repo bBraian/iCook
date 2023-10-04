@@ -11,7 +11,7 @@ export function Login() {
         <Input type="password" placeholder="Senha" />
         <ForgotPassword href="#">Esqueceu a senha?</ForgotPassword>
         <LargeButton text="LOGAR" config="secondary" />
-        <SignUpLink href="#">Não tem conta. Registre-se</SignUpLink>
+        <SignUpLink to="/register">Não tem conta. Registre-se</SignUpLink>
       </LoginForm>
     </Container>
   );
