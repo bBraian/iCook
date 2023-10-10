@@ -16,7 +16,6 @@ export function Home() {
                 <MastersCheffs />
             </Body>
         </>
-
     )
 }
 
