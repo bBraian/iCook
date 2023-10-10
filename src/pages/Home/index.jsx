@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Header } from "../../components/Header";
 import { Search } from "../../components/Search";
 import { Trending } from "../../components/Trending";
+import { RecentRecipes } from "../../components/RecentRecipes";
+import { MastersCheffs } from "../../components/MastersCheffs";
 
 export function Home() {
     return (
@@ -10,6 +12,8 @@ export function Home() {
             <Search />
             <Body>
                 <Trending />
+                <RecentRecipes />
+                <MastersCheffs />
             </Body>
         </>
 
