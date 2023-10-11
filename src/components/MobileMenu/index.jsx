@@ -38,6 +38,4 @@ function MobileMenu({ isOpen, onClose }) {
       <Overlay onClick={onClose} />
     </>
   );
-};
-
-export default Menu;
+}
