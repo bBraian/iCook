@@ -1,15 +1,29 @@
 import styled from "styled-components"
 import { RecentRecipesCard } from "../RecentRecipesCard"
+import { useState } from "react"
+
+const categories = [
+    { id: 1, category: 'Salada' },
+    { id: 2, category: 'Café' },
+    { id: 3, category: 'Aperitivo' },
+    { id: 4, category: 'Macarrao' },
+]
 
 export function RecentRecipes() {
+    const [categorySelected, setCategorySelected] = useState(1)
     return (
         <Container>
             <Title>Receitas recentes</Title>
             <CategoryList>
-                <Category selected={false}>Salada</Category>
-                <Category selected={true}>Café</Category>
-                <Category selected={false}>Aperitivo</Category>
-                <Category selected={false}>Macarrao</Category>
+                {categories.map(category => (
+                    <Category 
+                        selected={category.id === categorySelected}
+                        key={category.id}
+                        onClick={() => setCategorySelected(category.id)}
+                    >
+                        {category.category}
+                    </Category>
+                ))}
             </CategoryList>
             <RecipesList>
                 <RecentRecipesCard />
@@ -36,7 +50,7 @@ const Title = styled.h1`
 const CategoryList = styled.div`
     display: flex;
     gap: 6px;
-    overflow-y: scroll;
+    overflow-x: scroll;
     margin-bottom: 20px;
 `
 
@@ -55,5 +69,5 @@ const Category = styled.button`
 const RecipesList = styled.div`
     display: flex;
     gap: 1rem;
-    overflow-y: scroll;
+    overflow-x: scroll;
 `

@@ -6,7 +6,7 @@ export function MastersCheffsCard() {
         <Container>
             <Img src="https://file.xunruicms.com/admin_html/assets/pages/media/profile/profile_user.jpg" />
             <Box>
-                <Title>Hambúrguer de Frango</Title>
+                <Title>Alessandra Blair</Title>
                 <Flex>
                     <RecipesCounter>2 receitas</RecipesCounter>
                     <Row>

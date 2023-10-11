@@ -7,6 +7,10 @@ export function MastersCheffs() {
             <Title>Master's Cheffs</Title>
             <MastersCheffsList>
                 <MastersCheffsCard />
+                <MastersCheffsCard />
+                <MastersCheffsCard />
+                <MastersCheffsCard />
+                <MastersCheffsCard />
             </MastersCheffsList>
         </Container>
     )
@@ -27,5 +31,5 @@ const Title = styled.h1`
 const MastersCheffsList = styled.div`
     display: flex;
     gap: 1rem;
-    overflow-y: scroll;
+    overflow-x: scroll;
 `

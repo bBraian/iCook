@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.button`
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    background-color: transparent;
     width: 124px;
 `
 
@@ -13,6 +17,9 @@ export const Img = styled.img`
 
 export const Box = styled.div`
     margin: 0 6px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
 `
 
 export const Title = styled.h2`

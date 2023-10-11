@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.button`
+    border: 0;
+    text-align: start;
     width: 280px;
     height: 200px;
     overflow: hidden;
@@ -44,15 +46,15 @@ export const Stars = styled.div`
     gap: 4px;
     border-radius: 8px;
     background: rgba(48, 48, 48, 0.30);
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
 
     color: ${props => props.theme['white-0']};
     font-size: 14px;
     font-weight: 600;
-    line-height: 19.60px;
+    line-height: 19px;
 `
 
-export const SaveBoxIcon = styled.button`
+export const SaveBoxIcon = styled.a`
     width: 32px;
     height: 32px;
     border: 0;

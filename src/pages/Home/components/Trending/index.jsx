@@ -56,7 +56,7 @@ const Title = styled.h1`
 const CardList = styled.div`
     display: flex;
     flex-direction: row;
-    overflow-y: scroll;
+    overflow-x: scroll;
     gap: 1rem;
 `
 
@@ -65,11 +65,13 @@ const TrendingCardBox = styled.div`
     flex-direction: column;
 `
 
-const Creator = styled.div`
+const Creator = styled.button`
     margin-top: 9px;
     display: flex;
     align-items: center;
     gap: 8px;
+    background-color: transparent;
+    border: 0;
 `
 
 const Avatar = styled.img`
