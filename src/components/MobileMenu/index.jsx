@@ -1,26 +1,7 @@
-import styled from 'styled-components';
+import { HiOutlineUser } from "react-icons/hi2";
+import { Avatar, Box, Divider, Greetings, Hello, MenuContainer, MenuHeader, MenuItem, MenuItems, MenuText, Overlay, Username, WelcomeText } from "./styles";
 
-const MenuContainer = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 75%;
-  background-color: #ffffff;
-  z-index: 2;
-`;
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-`;
-
-function MobileMenu({ isOpen, onClose }) {
+export function MobileMenu({ isOpen, onClose }) {
   if (!isOpen) {
     return null;
   }
@@ -28,12 +9,26 @@ function MobileMenu({ isOpen, onClose }) {
   return (
     <>
       <MenuContainer>
-        {/* Adicione seus itens de menu aqui */}
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-        </ul>
+        <MenuHeader>
+          <Avatar src="https://file.xunruicms.com/admin_html/assets/pages/media/profile/profile_user.jpg" />
+          <Box>
+            <Greetings>
+              <Hello>Olá,</Hello>
+              <Username>Kelly</Username>
+            </Greetings>
+            <WelcomeText>Bon appétit, cheff!</WelcomeText>
+          </Box>
+        </MenuHeader>
+
+        <Divider />
+
+        <MenuItems>
+          <MenuItem>
+            <HiOutlineUser style={{color: '#FFF', width: '30px', height: '30px'}} />
+            <MenuText>Meu perfil</MenuText>
+          </MenuItem>
+        </MenuItems>
+
       </MenuContainer>
       <Overlay onClick={onClose} />
     </>
