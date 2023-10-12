@@ -70,19 +70,21 @@ export const WelcomeText = styled.span`
 export const Divider = styled.div`
     width: 100%;
     height: 1px;
-    color: ${props => props.theme['white-0']};
-    margin: 10px 0 15px 0;
+    background-color: ${props => props.theme['white-0']};
+    margin: 12px 0 15px 0;
 `
 
 export const MenuItems = styled.div`
     display: flex;
     flex-direction: column;
     padding: 0 9px 0 9px;
+    gap: 22px;
 `
 
 export const MenuItem = styled.a`
     display: flex;
     align-items: center;
+    gap: 6px;
 `
 
 export const MenuText = styled.span`
@@ -91,4 +93,17 @@ export const MenuText = styled.span`
     font-style: normal;
     font-weight: 600;
     line-height: 140%;
+`
+
+export const Button = styled.button`
+    text-align: center;
+    color: ${props => props.config == 'primary' ? props.theme['primary-30'] : props.theme['white-0']};
+    background-color: ${props => props.config == 'primary' ? props.theme['white-0'] : props.theme['primary-60']};
+    border: 1px solid ${props => props.theme['white-0']};
+    border-radius: 10px;
+    height: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.40px;
+    word-wrap: break-word
 `

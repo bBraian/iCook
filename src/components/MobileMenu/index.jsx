@@ -1,5 +1,6 @@
 import { HiOutlineUser } from "react-icons/hi2";
-import { Avatar, Box, Divider, Greetings, Hello, MenuContainer, MenuHeader, MenuItem, MenuItems, MenuText, Overlay, Username, WelcomeText } from "./styles";
+import { Avatar, Box, Button, Divider, Greetings, Hello, MenuContainer, MenuHeader, MenuItem, MenuItems, MenuText, Overlay, Username, WelcomeText } from "./styles";
+import { BsBookmarkDash, BsFillFileEarmarkTextFill } from "react-icons/bs";
 
 export function MobileMenu({ isOpen, onClose }) {
   if (!isOpen) {
@@ -27,7 +28,25 @@ export function MobileMenu({ isOpen, onClose }) {
             <HiOutlineUser style={{color: '#FFF', width: '30px', height: '30px'}} />
             <MenuText>Meu perfil</MenuText>
           </MenuItem>
+          <MenuItem>
+            <BsBookmarkDash style={{color: '#FFF', width: '30px', height: '30px'}} />
+            <MenuText>Receitas salvas</MenuText>
+          </MenuItem>
+          <MenuItem>
+            <BsFillFileEarmarkTextFill style={{color: '#FFF', width: '30px', height: '30px'}} />
+            <MenuText>Minhas receitas</MenuText>
+          </MenuItem>
         </MenuItems>
+
+        <Box>
+          <Button config="primary" style={{marginTop: '20px'}}>
+            Criar nova receita
+          </Button>
+
+          <Button style={{marginTop: '12px'}}>
+            Deslogar
+          </Button>
+        </Box>
 
       </MenuContainer>
       <Overlay onClick={onClose} />
