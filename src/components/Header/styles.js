@@ -11,6 +11,9 @@ export const Container = styled.header`
     background-color: ${props => props.theme['primary-50']};
     height: 76px;
     width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 99;
 `
 
 export const Title = styled.h1`

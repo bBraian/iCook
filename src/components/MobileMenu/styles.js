@@ -96,7 +96,6 @@ export const MenuText = styled.span`
 `
 
 export const Button = styled.button`
-    text-align: center;
     color: ${props => props.config == 'primary' ? props.theme['primary-30'] : props.theme['white-0']};
     background-color: ${props => props.config == 'primary' ? props.theme['white-0'] : props.theme['primary-60']};
     border: 1px solid ${props => props.theme['white-0']};
@@ -105,5 +104,11 @@ export const Button = styled.button`
     font-size: 16px;
     font-weight: 600;
     line-height: 22.40px;
-    word-wrap: break-word
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    text-align: center;
+    cursor: pointer;
 `

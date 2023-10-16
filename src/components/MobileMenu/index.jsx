@@ -1,6 +1,8 @@
 import { HiOutlineUser } from "react-icons/hi2";
 import { Avatar, Box, Button, Divider, Greetings, Hello, MenuContainer, MenuHeader, MenuItem, MenuItems, MenuText, Overlay, Username, WelcomeText } from "./styles";
 import { BsBookmarkDash, BsFillFileEarmarkTextFill } from "react-icons/bs";
+import { FaPlus } from "react-icons/fa6";
+import { BiLogOut } from "react-icons/bi";
 
 export function MobileMenu({ isOpen, onClose }) {
   if (!isOpen) {
@@ -40,11 +42,15 @@ export function MobileMenu({ isOpen, onClose }) {
 
         <Box>
           <Button config="primary" style={{marginTop: '20px'}}>
+            <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
             Criar nova receita
+            <span></span>
           </Button>
 
           <Button style={{marginTop: '12px'}}>
+            <BiLogOut style={{color: '#FFF', width: '14px', height: '14px'}} />
             Deslogar
+            <span></span>
           </Button>
         </Box>
 
