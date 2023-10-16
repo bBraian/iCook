@@ -11,7 +11,7 @@ export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     return (
         <Container>
-            <Title>iCook</Title>
+            <Title to="/">iCook</Title>
             <Box>
                 <SmallButton text="Nova receita" icon={<BiPlus style={{color: '#EE8B8B', width: '20px', height: '20px'}} />} />
                 <HeaderButton>

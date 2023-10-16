@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.header`
     display: flex;
@@ -16,12 +17,13 @@ export const Container = styled.header`
     z-index: 99;
 `
 
-export const Title = styled.h1`
+export const Title = styled(Link)`
     color: ${props => props.theme['white-0']};
     font-size: 40px;
     font-style: normal;
     font-weight: 600;
     line-height: 120%;
+    text-decoration: none;
 `
 
 export const HeaderButton = styled.button`
