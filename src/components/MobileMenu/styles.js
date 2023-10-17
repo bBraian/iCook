@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 export const MenuContainer = styled.div`
   position: fixed;
@@ -81,7 +82,8 @@ export const MenuItems = styled.div`
     gap: 22px;
 `
 
-export const MenuItem = styled.a`
+export const MenuItem = styled(Link)`
+    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 6px;

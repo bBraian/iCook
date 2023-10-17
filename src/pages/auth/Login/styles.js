@@ -58,7 +58,7 @@ export const Input = styled.input`
   word-wrap: break-word;
 `;
 
-export const ForgotPassword = styled.a`
+export const ForgotPassword = styled(Link)`
   color: ${props => props.theme['white-0']};
   margin-top: 11px;
   margin-bottom: 17px;

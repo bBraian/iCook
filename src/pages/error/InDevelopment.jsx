@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { LargeButton } from "../../components/LargeButton"
-import { useNavigate } from "react-router-dom";
+import { useNavigate  } from "react-router-dom"
 
-export function NotFound() {
+export function InDevelopment() {
     const navigate = useNavigate();
 
     function handleNavigateHome() {
@@ -10,9 +10,9 @@ export function NotFound() {
     }
     return (
         <Container>
-            <Title>Página não encontrada</Title>
-            <Description>Oops! 😖 Essa página não foi encontrada em nosso servidor.</Description>
-            <LargeButton text="Voltar para Home"  style={{width: '320px'}} onClick={handleNavigateHome} />
+            <Title>Página em desenvolvimento</Title>
+            <Description>Oops! Essa página está em desenvolvimento, logo iremos disponibilizar este recurso para você 😉.</Description>
+            <LargeButton text="Voltar para Home"  style={{width: '320px'}} onClick={handleNavigateHome}  />
         </Container>
     )
 }

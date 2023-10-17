@@ -9,7 +9,7 @@ export function Login() {
         <Label>Fazer login</Label>
         <Input type="text" placeholder="Usuário" />
         <Input type="password" placeholder="Senha" />
-        <ForgotPassword href="#">Esqueceu a senha?</ForgotPassword>
+        <ForgotPassword to="/in-development">Esqueceu a senha?</ForgotPassword>
         <LargeButton text="LOGAR" config="secondary" />
         <SignUpLink to="/register">Não tem conta. Registre-se</SignUpLink>
       </LoginForm>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     padding: 0 1rem;
-    margin-top: 88px;
+    margin-top: 92px;
 `
 
 export const Row = styled.div`
@@ -26,5 +26,72 @@ export const Button = styled.button`
     font-size: 14px;
     font-weight: 600;
     line-height: 19.60px;
+`
 
+export const Username = styled.h1`
+    color: ${props => props.theme['neutral-90']};
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+`
+
+export const RecipeCounter = styled.span`
+    color: ${props => props.theme['neutral-40']};
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+`
+
+export const Description = styled.p`
+    margin-top: 12px;
+    color: ${props => props.theme['neutral-40']};
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+`
+
+export const Divider = styled.div`
+    margin: 14px 0;
+    width: 100%;
+    height: 1px;
+    background-color: ${props => props.theme['neutral-20']};
+`
+
+export const RecipesContainer = styled.div`
+    padding: 0 1rem;
+`
+
+export const ButtonsBox = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+export const RecipesButton = styled.button`
+    color: ${props => props.active == 's' ? props.theme['white-0'] : props.theme['primary-30']};
+    border-radius: 10px;
+    border: 0;
+    background-color: ${props => props.active == 's' ? props.theme['primary-50'] : props.theme['white-0']};
+    padding: 8px 30px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.60px;
+    transition: background ease-in-out 0.2s;
+
+    &:hover {
+        background-color: ${props => props.theme['primary-60']};
+        color: ${props => props.theme['white-0']};
+    }
+`
+
+export const RecipesList = styled.div`
+    margin-top: 16px;
+    gap: 1rem;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 2rem;
 `
