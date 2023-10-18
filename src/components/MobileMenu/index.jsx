@@ -3,10 +3,17 @@ import { Avatar, Box, Button, Divider, Greetings, Hello, MenuContainer, MenuHead
 import { BsBookmarkDash, BsFillFileEarmarkTextFill } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { BiLogOut } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 export function MobileMenu({ isOpen, onClose }) {
   if (!isOpen) {
     return null;
+  }
+
+  const navigate = useNavigate();
+
+  function handleNavigateTo(page) {
+      navigate(`/${page}`)
   }
 
   return (
@@ -41,13 +48,13 @@ export function MobileMenu({ isOpen, onClose }) {
         </MenuItems>
 
         <Box>
-          <Button config="primary" style={{marginTop: '20px'}}>
+          <Button config="primary" style={{marginTop: '20px'}} onClick={() => handleNavigateTo('criar-receita')}>
             <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
             Criar nova receita
             <span></span>
           </Button>
 
-          <Button style={{marginTop: '12px'}}>
+          <Button style={{marginTop: '12px'}} onClick={() => handleNavigateTo('login')}>
             <BiLogOut style={{color: '#FFF', width: '14px', height: '14px'}} />
             Deslogar
             <span></span>

@@ -4,7 +4,7 @@ import { BsBookmarkDash } from "react-icons/bs"
 
 export function TrendingCard() {
     return (
-        <Container>
+        <Container to="/receita">
             <Img src="https://img.freepik.com/fotos-premium/prato-de-comida-brasileira-em-fundo-fotografico_496782-1085.jpg" />
             <ShadowEffect />
             <TopBox>

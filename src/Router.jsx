@@ -7,6 +7,7 @@ import { NotFound } from './pages/error/NotFound';
 import { Recipe } from './pages/Recipe';
 import { Profile } from './pages/Profile';
 import { InDevelopment } from './pages/error/InDevelopment';
+import { CreateRecipe } from './pages/CreateRecipe';
 
 export function Router() {
     const [user, setUser] = useState(false)
@@ -15,6 +16,7 @@ export function Router() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/receita' element={<Recipe />} />
+            <Route path='/criar-receita' element={<CreateRecipe />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/register' element={ <Register /> } />
             <Route path='/in-development' element={ <InDevelopment /> } />
