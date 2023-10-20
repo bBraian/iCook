@@ -87,3 +87,17 @@ export const InputTime = styled.input`
     font-weight: 400;
     line-height: 140%;
 `
+
+export const EditImage = styled.button`
+    border: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: ${props => props.theme['white-0']};
+`
