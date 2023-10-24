@@ -2,9 +2,9 @@ import { BsFillPeopleFill } from "react-icons/bs"
 import { HiArrowRight } from "react-icons/hi2"
 import styled from "styled-components"
 
-export function ServesInput() {
+export function ServesInput({serves, ...rest}) {
     return (
-        <Container>
+        <Container {...rest}>
             <Box style={{gap: '16px'}}>
                 <IconBox>
                     <BsFillPeopleFill style={{color: '#E23E3E', width: '18px', height: '18px'}} />
@@ -12,7 +12,7 @@ export function ServesInput() {
                 <Text>Serve</Text>
             </Box>
             <Box style={{gap: '8px'}}>
-                <Amount>01</Amount>
+                <Amount>{serves}</Amount>
                 <HiArrowRight style={{color: '#000', width: '18px', height: '18px'}} />
             </Box>
         </Container>

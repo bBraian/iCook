@@ -1,27 +1,47 @@
+import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import styled from "styled-components";
 
 export function Ingredients() {
+    const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredient: { id: 1, name: '' }, amount: '0gr'}])
+    console.log(ingredientsList)
+
+    function addNewIngredient() {
+        setIngredientsList([...ingredientsList, { id:ingredientsList.length + 1, ingredient: {id:0, name: ''}, amount: '0gr'}])
+    }
+
+    function removeIngredient(id) {
+        const IngredientsWithoutDeletedOne = ingredientsList.filter(ingredient => ingredient.id != id)
+        setIngredientsList(IngredientsWithoutDeletedOne)
+    }
+
+    
+    function handleAmountChange(id, newAmount) {
+        const updatedIngredients = ingredientsList.map(item => {
+        if (item.id === id) {
+            return { ...item, amount: newAmount };
+        }
+        return item;
+        });
+        setIngredientsList(updatedIngredients);
+    };
+
     return (
         <Container>
             <Title>Ingredientes</Title>
             <IngredientsBox>
-                <Row>
-                    <Ingredient>Bife</Ingredient>
-                    <AmountInput value="" placeholder="100gr"></AmountInput>
-                    <DeleteIngredientButton>
-                        -
-                    </DeleteIngredientButton>
-                </Row>
-                <Row>
-                    <Ingredient>Arroz</Ingredient>
-                    <AmountInput value="" placeholder="150gr"></AmountInput>
-                    <DeleteIngredientButton>
-                        -
-                    </DeleteIngredientButton>
-                </Row>
+                {ingredientsList.map(ingredient => (
+                    <Row key={ingredient.ingredient.id}>
+                        <Ingredient>{ingredient.ingredient.name}</Ingredient>
+                        <AmountInput value={ingredient.amount} onChange={(e) => handleAmountChange(ingredient.id, e.target.value)} placeholder="100gr"></AmountInput>
+                        <DeleteIngredientButton onClick={() => removeIngredient(ingredient.id)}>
+                            -
+                        </DeleteIngredientButton>
+                    </Row>
+                ))}
+   
             </IngredientsBox>
-            <NewIngredientButton>
+            <NewIngredientButton onClick={addNewIngredient}>
                 <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
                 Novo ingrediente
             </NewIngredientButton>

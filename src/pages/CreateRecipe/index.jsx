@@ -6,9 +6,13 @@ import { Ingredients } from "./components/Ingredients"
 import { ServesInput } from "./components/ServesInput"
 import { Steps } from "./components/Steps"
 import { Container, CookTimeBox, EditImage, Img, ImgContainer, InputTime, InputsBox, Row, Span, Title, TitleInput } from "./styles"
+import { ServesModal } from "./components/ServesModal"
+import { useState } from "react"
 
 
 export function CreateRecipe() {
+    const [modalOpen, setModalOpen] = useState(false)
+    const [serves, setServes] = useState(1)
     return (
         <>
             <Header />
@@ -23,7 +27,8 @@ export function CreateRecipe() {
                     </EditImage>
                 </ImgContainer>
                 <TitleInput placeholder="Título da receita" />
-                <ServesInput />
+                <ServesInput serves={serves} onClick={() => setModalOpen(true)} />
+                <ServesModal modalOpen={modalOpen} setModalOpen={setModalOpen} serves={serves} setServes={setServes} />
                 <InputsBox>
                     <CookTimeBox>
                         <Span>Tempo de cozinha</Span>
