@@ -1,25 +1,45 @@
+import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import styled from "styled-components";
 
 export function Steps() {
+    const [stepsList, setStepsList] = useState([{ id: 1, text: ""}])
+    function addNewStep() {
+        setStepsList([...stepsList, { id: stepsList[stepsList.length - 1].id + 1, text: ""}])
+    }
+
+    function removeStep(id) {
+        if(stepsList.length > 1) {
+            const IngredientsWithoutDeletedOne = stepsList.filter(ingredient => ingredient.id != id)
+            setStepsList(IngredientsWithoutDeletedOne)
+        }
+    }
+
+    function handleTextChange(id, newText) {
+        const updatedSteps = stepsList.map(item => {
+        if (item.id === id) {
+            return { ...item, text: newText };
+        }
+        return item;
+        });
+        setStepsList(updatedSteps);
+    };
+
     return (
         <Container>
             <Title>Modo de preparo</Title>
             <IngredientsBox>
-                <Row>
-                    <Ingredient>Bife</Ingredient>
-                    <DeleteIngredientButton>
-                        -
-                    </DeleteIngredientButton>
-                </Row>
-                <Row>
-                    <Ingredient>Arroz</Ingredient>
-                    <DeleteIngredientButton>
-                        -
-                    </DeleteIngredientButton>
-                </Row>
+                {stepsList.map(step => (
+                    <Row key={step.id}>
+                        <Ingredient placeholder={`Passo ${step.id}`} value={step.name} onChange={(e) => handleTextChange(step.id, e.target.value)} />
+                        <DeleteIngredientButton onClick={() => removeStep(step.id)}>
+                            -
+                        </DeleteIngredientButton>
+                    </Row>
+                ))}
+               
             </IngredientsBox>
-            <NewIngredientButton>
+            <NewIngredientButton onClick={addNewStep}>
                 <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
                 Novo passo
             </NewIngredientButton>
@@ -54,7 +74,7 @@ const Row = styled.div`
     gap: 12px;
 `
 
-const Ingredient = styled.button`
+const Ingredient = styled.input`
     border: 1px solid ${props => props.theme['neutral-20']};
     border-radius: 10px;
     height: 44px;

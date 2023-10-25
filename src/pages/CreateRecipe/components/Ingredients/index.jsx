@@ -1,20 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import styled from "styled-components";
+import { IngredientsModal } from "../IngredientsModal";
 
 export function Ingredients() {
-    const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredient: { id: 1, name: '' }, amount: '0gr'}])
-    console.log(ingredientsList)
+    const [modalOpen, setModalOpen] = useState(0)
+    const [selected, setSelected] = useState({})
+    const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredient: { id: 1, name: 'Ingrediente' }, amount: ''}])
+    
+    useEffect(() => {
+        const updatedIngredients = ingredientsList.map(item => {
+            if (item.id === modalOpen) {
+                return { ...item, ingredient: selected };
+            }
+            return item;
+            });
+            setIngredientsList(updatedIngredients);
+    }, [selected])
 
     function addNewIngredient() {
-        setIngredientsList([...ingredientsList, { id:ingredientsList.length + 1, ingredient: {id:0, name: ''}, amount: '0gr'}])
+        setIngredientsList([...ingredientsList, { id: ingredientsList[ingredientsList.length - 1].id + 1, ingredient: {id: 1, name: 'Clique para selecionar'}, amount: '0gr'}])
     }
 
     function removeIngredient(id) {
-        const IngredientsWithoutDeletedOne = ingredientsList.filter(ingredient => ingredient.id != id)
-        setIngredientsList(IngredientsWithoutDeletedOne)
+        if(ingredientsList.length > 1) {
+            const IngredientsWithoutDeletedOne = ingredientsList.filter(ingredient => ingredient.id != id)
+            setIngredientsList(IngredientsWithoutDeletedOne)
+        }
     }
-
     
     function handleAmountChange(id, newAmount) {
         const updatedIngredients = ingredientsList.map(item => {
@@ -31,9 +44,9 @@ export function Ingredients() {
             <Title>Ingredientes</Title>
             <IngredientsBox>
                 {ingredientsList.map(ingredient => (
-                    <Row key={ingredient.ingredient.id}>
-                        <Ingredient>{ingredient.ingredient.name}</Ingredient>
-                        <AmountInput value={ingredient.amount} onChange={(e) => handleAmountChange(ingredient.id, e.target.value)} placeholder="100gr"></AmountInput>
+                    <Row key={ingredient.id}>
+                        <Ingredient onClick={() => setModalOpen(ingredient.id)}>{ingredient.ingredient.name}</Ingredient>
+                        <AmountInput value={ingredient.amount} onChange={(e) => handleAmountChange(ingredient.id, e.target.value)} placeholder="Quantidade"></AmountInput>
                         <DeleteIngredientButton onClick={() => removeIngredient(ingredient.id)}>
                             -
                         </DeleteIngredientButton>
@@ -45,6 +58,8 @@ export function Ingredients() {
                 <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
                 Novo ingrediente
             </NewIngredientButton>
+
+            <IngredientsModal modalOpen={modalOpen} setModalOpen={setModalOpen} selected={selected} setSelected={setSelected} />
         </Container>
     )
 }
