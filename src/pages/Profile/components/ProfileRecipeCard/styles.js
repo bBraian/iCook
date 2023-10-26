@@ -56,16 +56,21 @@ export const Stars = styled.div`
     line-height: 19px;
 `
 
-export const SaveBoxIcon = styled.a`
+export const SaveBoxIcon = styled.button`
+    border: 0;
     width: 32px;
     height: 32px;
     border: 0;
     cursor: pointer;
-    background-color: ${props => props.theme['white-0']};
+    background-color: ${props => props.theme['primary-50']};
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+`
+
+export const EditBoxIcon = styled(SaveBoxIcon)`
+    background-color: ${props => props.theme['white-0']};
 `
 
 export const BottomBox = styled.div`

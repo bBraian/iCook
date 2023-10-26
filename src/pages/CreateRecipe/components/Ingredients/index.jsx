@@ -6,7 +6,7 @@ import { IngredientsModal } from "../IngredientsModal";
 export function Ingredients() {
     const [modalOpen, setModalOpen] = useState(0)
     const [selected, setSelected] = useState({})
-    const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredient: { id: 1, name: 'Ingrediente' }, amount: ''}])
+    const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredient: { id: 0, name: 'Ingrediente' }, amount: ''}])
     
     useEffect(() => {
         const updatedIngredients = ingredientsList.map(item => {
@@ -39,13 +39,18 @@ export function Ingredients() {
         setIngredientsList(updatedIngredients);
     };
 
+    function openModal(ingredient) {
+        setModalOpen(ingredient.id)
+        setSelected(ingredient)
+    }
+
     return (
         <Container>
             <Title>Ingredientes</Title>
             <IngredientsBox>
                 {ingredientsList.map(ingredient => (
                     <Row key={ingredient.id}>
-                        <Ingredient onClick={() => setModalOpen(ingredient.id)}>{ingredient.ingredient.name}</Ingredient>
+                        <Ingredient onClick={() => openModal(ingredient.id == 0 ? {} : ingredient)}>{ingredient.ingredient.name}</Ingredient>
                         <AmountInput value={ingredient.amount} onChange={(e) => handleAmountChange(ingredient.id, e.target.value)} placeholder="Quantidade"></AmountInput>
                         <DeleteIngredientButton onClick={() => removeIngredient(ingredient.id)}>
                             -

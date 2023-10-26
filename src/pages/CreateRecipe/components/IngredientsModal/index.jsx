@@ -15,6 +15,12 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
     const [search, setSearch] = useState('')
     const [filteredIngredients, setFilteredIngredients] = useState({})
 
+    function handleCloseModal() {
+        setSelected({})
+        setModalOpen(0)
+        setSearch('')
+    }
+
     useEffect(() => {
         if(search) {
             let filter = fakeIngredients.filter(ingredient => ingredient.name.toLowerCase().includes(search.toLowerCase()))
@@ -31,7 +37,7 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
             <Container>
                 <Header>
                     <Text>Ingredients</Text>
-                    <CloseButton onClick={() => setModalOpen(false)}>
+                    <CloseButton onClick={handleCloseModal}>
                         <AiOutlineClose style={{color: '#E23E3E', width: '22px', height: '22px'}} />
                     </CloseButton>
                 </Header>
@@ -74,7 +80,7 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
                     
                 </IngredientsList>
             </Container>
-            <Overlay onClick={() => setModalOpen(false)} />
+            <Overlay onClick={handleCloseModal} />
         </>
 
     )

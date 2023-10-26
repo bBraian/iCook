@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     padding: 0 1rem;
@@ -17,7 +18,8 @@ export const Avatar = styled.img`
     border-radius: 50%;
 `
 
-export const Button = styled.button`
+export const LinkButton = styled(Link)`
+    text-decoration: none;
     color: ${props => props.theme['primary-50']};
     border: 1px solid ${props => props.theme['primary-50']};
     border-radius: 10px;
@@ -26,6 +28,45 @@ export const Button = styled.button`
     font-size: 14px;
     font-weight: 600;
     line-height: 19.60px;
+`
+
+export const Button = styled.button`
+    text-decoration: none;
+    color: ${props => props.theme['primary-50']};
+    border: 1px solid ${props => props.theme['primary-50']};
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.60px;
+`
+
+export const CancelBtn = styled(LinkButton)`
+    border: 1px solid ${props => props.theme['primary-50']};
+    color: ${props => props.theme['white-0']};
+    background-color: ${props => props.theme['primary-50']};
+`
+
+export const UsernameInput = styled.input`
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid #D9D9D9;
+    padding: 0 16px;
+
+    color: ${props => props.theme['neutral-90']};
+    font-size: 16px;
+`
+
+export const DescriptionInput = styled.textarea`
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #D9D9D9;
+    padding: 12px 16px;
+    resize: none;
+    color: #A9A9A9;
+    font-size: 16px;
 `
 
 export const Username = styled.h1`
