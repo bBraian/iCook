@@ -10,7 +10,6 @@ import { InDevelopment } from './pages/error/InDevelopment';
 import { CreateRecipe } from './pages/CreateRecipe';
 
 export function Router() {
-    const [user, setUser] = useState(false)
     return (
         <Routes>
             <Route path='/' element={<Home />} />
