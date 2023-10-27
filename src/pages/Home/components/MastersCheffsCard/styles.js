@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-export const Container = styled.button`
+export const Container = styled(Link)`
+    text-decoration: none;
     cursor: pointer;
     background-color: transparent;
     border: 0;
@@ -31,7 +33,7 @@ export const Img = styled.img`
 
 export const Title = styled.h1`
     margin: 55px 2px 4px 2px;
-    color: ${props => props.theme['neutral-92px']};
+    color: ${props => props.theme['neutral-90']};
     text-align: center;
     font-size: 20px;
     font-style: normal;

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { TrendingCard } from "../TrendingCard"
+import { Link } from "react-router-dom";
 
 export function Trending() {
     return (
@@ -8,28 +9,28 @@ export function Trending() {
             <CardList>
                 <TrendingCardBox>
                     <TrendingCard />
-                    <Creator>
+                    <Creator to="profile/1">
                         <Avatar src="https://s2-techtudo.glbimg.com/zAVzm6CbZ6VSmpDe76jhK7Qx73E=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/u/G/eQpsXGQB6xTlFlvJsUOw/avatar-a-lenda-de-aang.jpg" />
                         <Username>Por Niki Samantha</Username>
                     </Creator>
                 </TrendingCardBox>
                 <TrendingCardBox>
                     <TrendingCard />
-                    <Creator>
+                    <Creator to="profile/1">
                         <Avatar src="https://s2-techtudo.glbimg.com/zAVzm6CbZ6VSmpDe76jhK7Qx73E=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/u/G/eQpsXGQB6xTlFlvJsUOw/avatar-a-lenda-de-aang.jpg" />
                         <Username>Por Niki Samantha</Username>
                     </Creator>
                 </TrendingCardBox>
                 <TrendingCardBox>
                     <TrendingCard />
-                    <Creator>
+                    <Creator to="profile/1">
                         <Avatar src="https://s2-techtudo.glbimg.com/zAVzm6CbZ6VSmpDe76jhK7Qx73E=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/u/G/eQpsXGQB6xTlFlvJsUOw/avatar-a-lenda-de-aang.jpg" />
                         <Username>Por Niki Samantha</Username>
                     </Creator>
                 </TrendingCardBox>
                 <TrendingCardBox>
                     <TrendingCard />
-                    <Creator>
+                    <Creator to="profile/1">
                         <Avatar src="https://s2-techtudo.glbimg.com/zAVzm6CbZ6VSmpDe76jhK7Qx73E=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/u/G/eQpsXGQB6xTlFlvJsUOw/avatar-a-lenda-de-aang.jpg" />
                         <Username>Por Niki Samantha</Username>
                     </Creator>
@@ -65,13 +66,14 @@ const TrendingCardBox = styled.div`
     flex-direction: column;
 `
 
-const Creator = styled.button`
+const Creator = styled(Link)`
     margin-top: 9px;
     display: flex;
     align-items: center;
     gap: 8px;
     background-color: transparent;
     border: 0;
+    text-decoration: none;
 `
 
 const Avatar = styled.img`

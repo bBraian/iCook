@@ -17,7 +17,7 @@ export function Router() {
             <Route path='/login' element={<Login />} />
             <Route path='/receita' element={<Recipe />} />
             <Route path='/criar-receita' element={<CreateRecipe />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/:userId' element={<Profile />} />
             <Route path='/register' element={ <Register /> } />
             <Route path='/in-development' element={ <InDevelopment /> } />
             <Route path='*' element={ <NotFound /> } />

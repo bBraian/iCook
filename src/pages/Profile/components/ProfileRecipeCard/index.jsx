@@ -16,7 +16,7 @@ export function ProfileRecipeCard({type}) {
                     <AiTwotoneStar style={{color: '#FFF', width: '16px', height: '16px'}} />
                     <span>5,0</span>
                 </Stars>
-                {type == 1 ? (
+                {type == 1 || type == 3 ? (
                     <SaveBoxIcon>
                         <BsBookmarkDash style={{color: '#FFF', width: '18px', height: '18px'}} />
                     </SaveBoxIcon>

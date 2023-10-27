@@ -108,7 +108,7 @@ export const RecipesContainer = styled.div`
 export const ButtonsBox = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: ${props => props.isMyProfile ? "space-between" : "flex-end"};
 `
 
 export const RecipesButton = styled.button`

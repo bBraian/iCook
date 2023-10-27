@@ -3,7 +3,7 @@ import { Box, Container, Flex, Img, RecipesCounter, ReviewsCounter, Row, Stars, 
 
 export function MastersCheffsCard() {
     return (
-        <Container>
+        <Container to="profile/1">
             <Img src="https://file.xunruicms.com/admin_html/assets/pages/media/profile/profile_user.jpg" />
             <Box>
                 <Title>Alessandra Blair</Title>

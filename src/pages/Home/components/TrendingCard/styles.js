@@ -55,7 +55,7 @@ export const Stars = styled.div`
     line-height: 19px;
 `
 
-export const SaveBoxIcon = styled.a`
+export const SaveBoxIcon = styled.button`
     width: 32px;
     height: 32px;
     border: 0;
