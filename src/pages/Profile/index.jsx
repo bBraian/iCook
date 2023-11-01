@@ -37,7 +37,6 @@ export function Profile() {
     }, [state])
 
     function checkIsMyProfile(userId) { //Essa função checará se o usuário é o mesmo do perfil (validação backend), caso não seja o mesmo usuário, bloquear botões de edição
-        console.log(userId)
         if(userId == 0) {
             return true;
         }

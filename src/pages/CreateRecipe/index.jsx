@@ -8,11 +8,15 @@ import { Steps } from "./components/Steps"
 import { Container, CookTimeBox, EditImage, Img, ImgContainer, InputTime, InputsBox, Row, Span, Title, TitleInput } from "./styles"
 import { ServesModal } from "./components/ServesModal"
 import { useState } from "react"
+import { CategoryInput } from "./components/CategoryInput"
+import { TypeInput } from "./components/TypeInput"
 
 
 export function CreateRecipe() {
     const [modalOpen, setModalOpen] = useState(false)
     const [serves, setServes] = useState(1)
+    const [categoryId, setCategoryId] = useState({id: 0, name: 'Selecione a categoria'})
+    const [typeId, setTypeId] = useState(1)
     return (
         <>
             <Header />
@@ -27,7 +31,11 @@ export function CreateRecipe() {
                     </EditImage>
                 </ImgContainer>
                 <TitleInput placeholder="Título da receita" />
+
                 <ServesInput serves={serves} onClick={() => setModalOpen(true)} />
+                <CategoryInput categoryId={categoryId} setCategoryId={setCategoryId} />
+                <TypeInput serves={serves} onClick={() => setModalOpen(true)} />
+
                 <ServesModal modalOpen={modalOpen} setModalOpen={setModalOpen} serves={serves} setServes={setServes} />
                 <InputsBox>
                     <CookTimeBox>
