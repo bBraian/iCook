@@ -1,20 +1,19 @@
 import styled from "styled-components"
 import { IngredientItem } from "../IngredientItem"
 
-export function Ingredient() {
+export function Ingredient({ingredients}) {
+    console.log(ingredients)
     return (
         <Container>
             <Row>
                 <Title>Ingredientes</Title>
-                <Amount>3 itens</Amount>
+                <Amount>{ingredients.length} itens</Amount>
             </Row>
 
             <IngredientList>
-                <IngredientItem />
-                <IngredientItem />
-                <IngredientItem />
-                <IngredientItem />
-                <IngredientItem />
+                {ingredients && ingredients.map(ingredient => (
+                    <IngredientItem key={ingredient.id} data={ingredient} />
+                ))}
             </IngredientList>
         </Container>
     )

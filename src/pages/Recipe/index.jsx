@@ -11,18 +11,19 @@ import { api } from "../../lib/axios"
 export function Recipe() {
     const [ratting, setRatting] = useState(-1)
     const { recipeId } = useParams()
-    const [recipe, setRecipe] = useState()
+    const [recipe, setRecipe] = useState({})
 
-    // useEffect(() => {
-    //     if(recipeId > 0) {
-    //         getRecipe()
-    //     }
-    // }, [])
+    useEffect(() => {
+        if(recipeId > 0) {
+            getRecipe()
+        }
+    }, [])
 
-    // async function getRecipe() {
-    //     const data = await api.get(`recipe/${recipeId}`)
-    //     setRecipe(data)
-    // }
+    async function getRecipe() {
+        const data = await api.get(`recipe/${recipeId}`)
+        console.log(data.data)
+        setRecipe(data.data)
+    }
 
     const stars = Array.from({ length: 5 }, (_, index) => (
         <RateButton key={index} onClick={() => setRatting(index)}>
@@ -34,30 +35,30 @@ export function Recipe() {
             <Header />
             <Container>
                 <Row>
-                    <Title>Como fazer torrada francesa</Title>
+                    <Title>{recipe.name}</Title>
                     <BookmarkButton>
                         <BsBookmarkDash style={{color: '#FFF', width: '22px', height: '22px'}} />
                     </BookmarkButton>
                 </Row>
                 <ImgContainer>
-                    <Img src="https://img.freepik.com/fotos-premium/prato-de-comida-brasileira-em-fundo-fotografico_496782-1085.jpg" />
+                    <Img src={recipe.image} />
                     <ServesCounterBox>
                         <BsFillPeopleFill style={{color: '#FFF', width: '18px', height: '18px'}} />
-                        <span>4</span>
+                        <span>{recipe.serves}</span>
                     </ServesCounterBox>
                 </ImgContainer>
                 <Row style={{marginTop: '9px'}}>
                     <UserInfos>
                         <Avatar src="https://file.xunruicms.com/admin_html/assets/pages/media/profile/profile_user.jpg" />
-                        <Username>Roberta Anny</Username>
+                        <Username>{recipe.user == undefined ? '' : recipe.user.name}</Username>
                     </UserInfos>
                     <Review>
                         <Stars>
                             <AiTwotoneStar style={{color: '#FFB660', width: '16px', height: '16px'}} />
-                            <span>4,5</span>
+                            <span>{recipe.rating == undefined ? '' :recipe.rating.averageRating}</span>
                         </Stars>
                         <ReviewsCounter>
-                            (300 Reviews)
+                            ({recipe.rating == undefined ? '' :recipe.rating.ratingAmount} Reviews)
                         </ReviewsCounter>
                     </Review>
                 </Row>
@@ -68,8 +69,8 @@ export function Recipe() {
                     </RatingStarsBox>
                 </Row>
 
-                <Ingredient />
-                <Preparation />
+                <Ingredient ingredients={recipe.ingredient == undefined ? false : recipe.ingredient} />
+                <Preparation steps={recipe.RecipeSteps} />
             </Container>
         </>
     )
