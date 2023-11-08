@@ -13,7 +13,7 @@ export function Router() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/receita' element={<Recipe />} />
+            <Route path='/receita/:recipeId' element={<Recipe />} />
             <Route path='/criar-receita' element={<CreateRecipe />} />
             <Route path='/profile/:userId' element={<Profile />} />
             <Route path='/register' element={ <Register /> } />

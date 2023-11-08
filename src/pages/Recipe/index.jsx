@@ -2,12 +2,27 @@ import { BsBookmarkDash, BsFillPeopleFill } from "react-icons/bs"
 import { Header } from "../../components/Header"
 import { Avatar, BookmarkButton, Container, Img, ImgContainer, RateButton, RatingStarsBox, RatingText, Review, ReviewsCounter, Row, ServesCounterBox, Stars, Title, UserInfos, Username } from "./styles"
 import { AiTwotoneStar } from "react-icons/ai"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Ingredient } from "./components/Ingredient"
 import { Preparation } from "./components/Preparation"
+import { useParams } from "react-router-dom"
+import { api } from "../../lib/axios"
 
 export function Recipe() {
     const [ratting, setRatting] = useState(-1)
+    const { recipeId } = useParams()
+    const [recipe, setRecipe] = useState()
+
+    // useEffect(() => {
+    //     if(recipeId > 0) {
+    //         getRecipe()
+    //     }
+    // }, [])
+
+    // async function getRecipe() {
+    //     const data = await api.get(`recipe/${recipeId}`)
+    //     setRecipe(data)
+    // }
 
     const stars = Array.from({ length: 5 }, (_, index) => (
         <RateButton key={index} onClick={() => setRatting(index)}>
