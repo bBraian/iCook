@@ -2,16 +2,15 @@ import styled from "styled-components"
 import { IngredientItem } from "../IngredientItem"
 
 export function Ingredient({ingredients}) {
-    console.log(ingredients)
     return (
         <Container>
             <Row>
                 <Title>Ingredientes</Title>
-                <Amount>{ingredients.length} itens</Amount>
+                <Amount>{ingredients != undefined && ingredients.length} itens</Amount>
             </Row>
 
             <IngredientList>
-                {ingredients && ingredients.map(ingredient => (
+                {ingredients != undefined && ingredients.map((ingredient) => (
                     <IngredientItem key={ingredient.id} data={ingredient} />
                 ))}
             </IngredientList>

@@ -8,6 +8,8 @@ import { Preparation } from "./components/Preparation"
 import { useParams } from "react-router-dom"
 import { api } from "../../lib/axios"
 
+const starsRate = [1,2,3,4,5];
+
 export function Recipe() {
     const [ratting, setRatting] = useState(-1)
     const { recipeId } = useParams()
@@ -20,14 +22,16 @@ export function Recipe() {
     }, [])
 
     async function getRecipe() {
-        const data = await api.get(`recipe/${recipeId}`)
-        console.log(data.data)
-        setRecipe(data.data)
+        const { data } = await api.get(`recipe/${recipeId}`)
+        setRecipe(data)
+        if(data.rated) {
+            setRatting(data.rate)
+        }
     }
 
-    const stars = Array.from({ length: 5 }, (_, index) => (
-        <RateButton key={index} onClick={() => setRatting(index)}>
-            <AiTwotoneStar style={{ color: ratting == -1 ? '#A9A9A9' : ratting >= index ? '#FFB660' : '#A9A9A9', width: '24px', height: '24px' }} />
+    const stars = starsRate.map(rate => (
+        <RateButton key={rate} onClick={() => setRatting(rate)}>
+            <AiTwotoneStar style={{ color: ratting == -1 ? '#A9A9A9' : ratting >= rate ? '#FFB660' : '#A9A9A9', width: '24px', height: '24px' }} />
         </RateButton>
     ));
     return (
@@ -36,8 +40,8 @@ export function Recipe() {
             <Container>
                 <Row>
                     <Title>{recipe.name}</Title>
-                    <BookmarkButton>
-                        <BsBookmarkDash style={{color: '#FFF', width: '22px', height: '22px'}} />
+                    <BookmarkButton saved={recipe.saved ? 'S' : 'N'}>
+                        <BsBookmarkDash style={{color: recipe.saved ? '#FFF' : '#EE8B8B', width: '22px', height: '22px'}} />
                     </BookmarkButton>
                 </Row>
                 <ImgContainer>
@@ -49,16 +53,16 @@ export function Recipe() {
                 </ImgContainer>
                 <Row style={{marginTop: '9px'}}>
                     <UserInfos>
-                        <Avatar src="https://file.xunruicms.com/admin_html/assets/pages/media/profile/profile_user.jpg" />
-                        <Username>{recipe.user == undefined ? '' : recipe.user.name}</Username>
+                        <Avatar src={recipe.avatar} />
+                        <Username>{recipe.user_name}</Username>
                     </UserInfos>
                     <Review>
                         <Stars>
                             <AiTwotoneStar style={{color: '#FFB660', width: '16px', height: '16px'}} />
-                            <span>{recipe.rating == undefined ? '' :recipe.rating.averageRating}</span>
+                            <span>{recipe.rating_sum / recipe.review_amount}</span>
                         </Stars>
                         <ReviewsCounter>
-                            ({recipe.rating == undefined ? '' :recipe.rating.ratingAmount} Reviews)
+                            ({recipe.review_amount} Reviews)
                         </ReviewsCounter>
                     </Review>
                 </Row>
@@ -69,8 +73,8 @@ export function Recipe() {
                     </RatingStarsBox>
                 </Row>
 
-                <Ingredient ingredients={recipe.ingredient == undefined ? false : recipe.ingredient} />
-                <Preparation steps={recipe.RecipeSteps} />
+                <Ingredient ingredients={recipe.ingredients} />
+                <Preparation steps={recipe.steps} kitchen_time={recipe.kitchen_time} />
             </Container>
         </>
     )

@@ -29,7 +29,8 @@ export const BookmarkButton = styled.button`
     justify-content: center;
     border: 0;
     border-radius: 10px;
-    background-color: ${props => props.theme['primary-50']};
+    border: 1px solid ${props => props.saved == 'S' ? props.theme['primary-30'] : props.theme['primary-50']};
+    background-color: ${props => props.saved == 'S' ? props.theme['primary-50'] : props.theme['white-0']};
 `
 
 export const ImgContainer = styled.div`

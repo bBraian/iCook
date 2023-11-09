@@ -1,22 +1,20 @@
 import styled from "styled-components"
 
-export function Preparation() {
+export function Preparation({steps, kitchen_time}) {
     return (
         <Container>
             <Row>
                 <Title>Modo de preparo</Title>
-                <Amount>40 min</Amount>
+                <Amount>{kitchen_time}</Amount>
             </Row>
 
             <PreparationStep>
-                <Step>
-                    <Index>1</Index>
-                    <StepDescription>Misture maionese, limão, mostarda, sal e pimenta em uma tigela média</StepDescription>
-                </Step>
-                <Step>
-                    <Index>2</Index>
-                    <StepDescription>Misture maionese, limão, mostarda, sal e pimenta em uma tigela média</StepDescription>
-                </Step>
+                {steps != undefined && steps.map((step, i) => (
+                    <Step key={step.id}>
+                        <Index>{i + 1}</Index>
+                        <StepDescription>{step.description}</StepDescription>
+                    </Step>
+                ))}
             </PreparationStep>
         </Container>
     )
