@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     padding: 0 1rem;
@@ -16,9 +15,10 @@ export const Avatar = styled.img`
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    object-fit: cover;
 `
 
-export const LinkButton = styled(Link)`
+export const LinkButton = styled.button`
     text-decoration: none;
     color: ${props => props.theme['primary-50']};
     border: 1px solid ${props => props.theme['primary-50']};
@@ -108,7 +108,7 @@ export const RecipesContainer = styled.div`
 export const ButtonsBox = styled.div`
     display: flex;
     align-items: center;
-    justify-content: ${props => props.isMyProfile ? "space-between" : "flex-end"};
+    justify-content: ${props => props.ismyprofile == 'S' ? "space-between" : "flex-end"};
 `
 
 export const RecipesButton = styled.button`

@@ -16,11 +16,12 @@ export function ProfileRecipeCard({type}) {
                     <AiTwotoneStar style={{color: '#FFF', width: '16px', height: '16px'}} />
                     <span>5,0</span>
                 </Stars>
-                {type == 1 || type == 3 ? (
+                {type == 1 &&  (
                     <SaveBoxIcon>
                         <BsBookmarkDash style={{color: '#FFF', width: '18px', height: '18px'}} />
                     </SaveBoxIcon>
-                ) : (
+                )}
+                {type == 2 && (
                     <EditBoxIcon onClick={() => setModalOpen(true)}>
                         <BiDotsHorizontalRounded style={{color: '#E23E3E', width: '18px', height: '18px'}} />
                     </EditBoxIcon>

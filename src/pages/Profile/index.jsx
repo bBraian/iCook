@@ -3,8 +3,12 @@ import { Header } from "../../components/Header";
 import { ProfileRecipeCard } from "./components/ProfileRecipeCard";
 import { Avatar, Button, ButtonsBox, CancelBtn, Container, Description, DescriptionInput, Divider, LinkButton, RecipeCounter, RecipesButton, RecipesContainer, RecipesList, Row, Username, UsernameInput } from "./styles";
 import { useLocation, useParams } from "react-router-dom";
+import { api } from "../../lib/axios";
+import defautAvatar from "../../assets/avatar.png"
+import Loading from "../../components/Loading";
 
 export function Profile() {
+    const [isLoading, setIsLoading] = useState(true);
     const [originalUserData, setOriginalUserdata] = useState({})
     const [userData, setUserdata] = useState({})
     const { state } = useLocation();
@@ -14,37 +18,43 @@ export function Profile() {
     const [isMyProfile, setIsMyProfile] = useState(false)
 
     useEffect(() => {
-        setUserdata({ name: 'Braian', avatar: 'https://file.xunruicms.com/admin_html/assets/pages/media/profile/profile_user.jpg', description: 'Olá mundo, sou Alessandra Blair, sou da italiana 🟢⚪🔴 e adoro cozinhar!' })
-        setOriginalUserdata({ name: 'Braian', avatar: 'https://file.xunruicms.com/admin_html/assets/pages/media/profile/profile_user.jpg', description: 'Olá mundo, sou Alessandra Blair, sou da italiana 🟢⚪🔴 e adoro cozinhar!' })
+        getUser()
     }, [])
 
     useEffect(() => {
-        if(checkIsMyProfile(userId)) {
-            setIsMyProfile(true)
-            if(state) {
-                if(state.edit) {
-                    setIsEditting(true)
-                } else {
-                    setIsEditting(false)
-                }
-                if(state.activeButton) {
-                    setActiveButton(state.activeButton)
-                }
+        if(state) {
+            if(state.activeButton) {
+                setActiveButton(state.activeButton)
             }
-        } else {
-            setIsMyProfile(false)
         }
     }, [state])
 
-    function checkIsMyProfile(userId) { //Essa função checará se o usuário é o mesmo do perfil (validação backend), caso não seja o mesmo usuário, bloquear botões de edição
-        if(userId == 0) {
-            return true;
+    async function getUser() {
+        const { data } = await api.get(`user/${userId}`)
+        console.log(data)
+        setUserdata(data)
+        if(data.is_me) {
+            setIsMyProfile(true)
+            setOriginalUserdata(data)
+        } else {
+            setIsMyProfile(false)
         }
-        return false;
+        setIsLoading(false)
     }
 
     function handleSaveProfile() {
 
+    }
+
+    function cancelUserEdit() {
+        setUserdata(originalUserData)
+        setIsEditting(false)
+    }
+
+    if(isLoading) {
+        return (
+            <Loading />
+        )
     }
 
     return (
@@ -52,16 +62,16 @@ export function Profile() {
             <Header />
             <Container>
                 <Row>
-                    <Avatar src={userData.avatar} />
+                    <Avatar src={userData.avatar ? userData.avatar : defautAvatar} />
                     {isEditting ? (
                         <>
-                            <CancelBtn to="/profile/0" state={{ edit: false, user: 0 }} onClick={() => setUserdata(originalUserData)}>Cancelar</CancelBtn>
+                            <CancelBtn onClick={cancelUserEdit}>Cancelar</CancelBtn>
                             <Button onClick={handleSaveProfile}>Salvar Perfil</Button>
                         </>
                     ) : (
                         <>
                             {isMyProfile ? (
-                                <LinkButton to="/profile/0" state={{ edit: true, user: 0 }}>Editar Perfil</LinkButton>
+                                <LinkButton onClick={() => setIsEditting(true)}>Editar Perfil</LinkButton>
                             ) : (<></>)}
                         </>
                     )}
@@ -85,14 +95,14 @@ export function Profile() {
             </Container>
             <Divider />
             <RecipesContainer>
-                <ButtonsBox isMyProfile={isMyProfile} >
+                <ButtonsBox ismyprofile={isMyProfile ? 'S' : 'N'} >
                     { isMyProfile ? (
                         <>
                             <RecipesButton active={activeButton == 1 ? 's' : 'n'} onClick={() => setActiveButton(1)}>Receitas salvas</RecipesButton>
                             <RecipesButton active={activeButton == 2 ? 's' : 'n'} onClick={() => setActiveButton(2)}>Minhas receitas</RecipesButton>
                         </>
                     ) : (
-                        <RecipesButton active="s">Receitas de Braian</RecipesButton>
+                        <RecipesButton active="s">Receitas de {userData.name != undefined && userData.name.split(' ')[0]}</RecipesButton>
                     ) }
                 </ButtonsBox>
 
@@ -101,14 +111,15 @@ export function Profile() {
                     <>
                         {activeButton == 1 ? (
                             <RecipesList>
-                                <ProfileRecipeCard type={1} />
-                                <ProfileRecipeCard type={1} />
-                                <ProfileRecipeCard type={1} />
+                                {userData.recipe != undefined && userData.recipe.map(recipe => (
+                                    <ProfileRecipeCard key={recipe.id} data={recipe} type={1} />
+                                ))}
                             </RecipesList>
                         ) : (
                             <RecipesList>
-                                <ProfileRecipeCard type={2} />
-                                <ProfileRecipeCard type={2} />
+                                {userData.saved_recipes != undefined && userData.saved_recipes.map(savedRecipes => (
+                                    <ProfileRecipeCard key={savedRecipes.id} data={savedRecipes} type={1} />
+                                ))}
                             </RecipesList>
                         )}
                     </>

@@ -7,10 +7,12 @@ import { Ingredient } from "./components/Ingredient"
 import { Preparation } from "./components/Preparation"
 import { useParams } from "react-router-dom"
 import { api } from "../../lib/axios"
+import Loading from "../../components/Loading"
 
 const starsRate = [1,2,3,4,5];
 
 export function Recipe() {
+    const [isLoading, setIsLoading] = useState(true);
     const [ratting, setRatting] = useState(-1)
     const { recipeId } = useParams()
     const [recipe, setRecipe] = useState({})
@@ -27,6 +29,7 @@ export function Recipe() {
         if(data.rated) {
             setRatting(data.rate)
         }
+        setIsLoading(false)
     }
 
     const stars = starsRate.map(rate => (
@@ -34,6 +37,13 @@ export function Recipe() {
             <AiTwotoneStar style={{ color: ratting == -1 ? '#A9A9A9' : ratting >= rate ? '#FFB660' : '#A9A9A9', width: '24px', height: '24px' }} />
         </RateButton>
     ));
+
+    if(isLoading) {
+        return (
+            <Loading />
+        )
+    }
+
     return (
         <>
             <Header />
