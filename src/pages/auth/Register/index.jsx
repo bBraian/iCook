@@ -4,6 +4,7 @@ import { Container, Img, ImgButton, ImgLabel, Input, Label, LoginForm, SignUpLin
 import { HiOutlineUser } from 'react-icons/hi2'
 import Swal from "sweetalert2";
 import { api } from "../../../lib/axios";
+import { useNavigate } from "react-router-dom";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -20,6 +21,8 @@ const Toast = Swal.mixin({
 export function Register() {
   const [avatar, setAvatar] = useState()
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '', avatar: '' })
+
+  const navigate = useNavigate();
 
   const updateField = (campo, valor) => {
     setForm((prevForm) => ({
@@ -65,9 +68,16 @@ export function Register() {
     api.post('/user', { name: form.name, email: form.email, password: form.password })
     .then((response) => {
       console.log(response)
-      if(error.response.data.statusCode === 201) {
-        //verificar se veio o token, armazenar (context)
-        //direcionar para home
+      if(response.status === 201) {
+        Swal.fire({
+          title: "Usuário criado com sucesso!",
+          text: "Faça login para continuar",
+          icon: "success",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#3085d6",
+        }).then(() => {
+          navigate('/login')
+        });
       } else {
         Toast.fire({
           icon: "error",
@@ -113,7 +123,7 @@ export function Register() {
         <Input type="password" placeholder="Confirmar senha" name="confirmPassword" style={{marginBottom: '28px'}} value={form.confirmPassword} onChange={handleChange} required />
 
         <LargeButton text="CRIAR" config="secondary" style={{width: '320px'}} type="submit" />
-        <SignUpLink href="#">Ja tem conta? Logar-se</SignUpLink>
+        <SignUpLink to="/login">Ja tem conta? Logar-se</SignUpLink>
       </LoginForm>
     </Container>
   );

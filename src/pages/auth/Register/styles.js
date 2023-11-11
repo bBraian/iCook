@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     display: flex;
@@ -90,21 +91,7 @@ export const ImgLabel = styled.label`
   margin-top: 7px;
 `
 
-export const ForgotPassword = styled.a`
-  color: ${props => props.theme['white-0']};
-  margin-top: 11px;
-  margin-bottom: 17px;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 22.40px;
-  word-wrap: break-word;
-  text-decoration: none;
-  display: flex;
-  flex: 1;
-  justify-content: end;
-`;
-
-export const SignUpLink = styled.a`
+export const SignUpLink = styled(Link)`
   color: ${props => props.theme['white-0']};
   text-align: center;
   margin-top: 9px;

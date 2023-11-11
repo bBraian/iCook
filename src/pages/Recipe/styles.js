@@ -2,7 +2,8 @@ import styled from "styled-components"
 
 export const Container = styled.div`
     padding: 0 1rem;
-    margin-top: 92px;
+    max-width: 900px;
+    margin: 92px auto 32px auto;
 `
 
 export const Row = styled.div`
