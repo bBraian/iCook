@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { LargeButton } from "../../../components/LargeButton";
 import { Container, ForgotPassword, Input, Label, LoginForm, SignUpLink, Title } from "./styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { api } from "../../../lib/axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../context/AuthContext";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -20,6 +21,7 @@ const Toast = Swal.mixin({
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { signIn } = useContext(AuthContext)
   const navigate = useNavigate();
 
   function handleLogin(event) {
@@ -28,6 +30,7 @@ export function Login() {
     .then((response) => {
       console.log(response)
       if(response.status === 200) {
+        signIn(response.data.access_token)
         //armazenar token no context
         //direcionar para home
         // navigate('/')

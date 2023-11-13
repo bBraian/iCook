@@ -44,6 +44,13 @@ export const MenuButton = styled(HeaderButton)`
     }
 `
 
+export const Image = styled.img`
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+`
+
 export const Box = styled.div`
     display: flex;
     align-items: center;
