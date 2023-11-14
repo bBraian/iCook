@@ -5,16 +5,21 @@ import { BsBookmarkDash } from "react-icons/bs"
 import { EditRecipeModal } from "../EditRecipeModal";
 import { useState } from "react";
 
-export function ProfileRecipeCard({type}) {
+export function ProfileRecipeCard({type, data}) {
     const [modalOpen, setModalOpen] = useState(false)
+
+    if(data == undefined) {
+        return <></>
+    }
+    
     return (
-        <Container to="/receita">
-            <Img src="https://img.freepik.com/fotos-premium/prato-de-comida-brasileira-em-fundo-fotografico_496782-1085.jpg" />
+        <Container to={`/receita/${data.id}`}>
+            <Img src={data.image} />
             <ShadowEffect />
             <TopBox>
                 <Stars>
                     <AiTwotoneStar style={{color: '#FFF', width: '16px', height: '16px'}} />
-                    <span>5,0</span>
+                    <span>{isNaN(data.rating_sum / data.review_amount) ? 0 : data.rating_sum / data.review_amount}</span>
                 </Stars>
                 {type == 1 &&  (
                     <SaveBoxIcon>
@@ -29,8 +34,8 @@ export function ProfileRecipeCard({type}) {
                 
             </TopBox>
             <BottomBox>
-                <Title>Como fazer italiano espaguete em casa</Title>
-                <Infos>12 Ingredients | 40 min</Infos>
+                <Title>{data.name}</Title>
+                <Infos>{data.ingredients_amount} Ingredientes | {data.kitchen_time}</Infos>
             </BottomBox>
             <EditRecipeModal setModalOpen={setModalOpen} modalOpen={modalOpen} />
         </Container>

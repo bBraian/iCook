@@ -31,9 +31,23 @@ export function Login() {
       console.log(response)
       if(response.status === 200) {
         signIn(response.data.access_token)
-        //armazenar token no context
-        //direcionar para home
-        // navigate('/')
+        .then((res) => {
+          if(res) {
+            navigate('/')
+          } else {
+            Toast.fire({
+              icon: "error",
+              title: "Erro ao fazer login"
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+          Toast.fire({
+            icon: "error",
+            title: "Erro ao fazer login"
+          });
+        })
       } else {
         Toast.fire({
           icon: "error",

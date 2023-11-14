@@ -8,6 +8,7 @@ import { Preparation } from "./components/Preparation"
 import { useParams } from "react-router-dom"
 import { api } from "../../lib/axios"
 import Loading from "../../components/Loading"
+import defaultImage from "../../assets/avatar.png"
 
 const starsRate = [1,2,3,4,5];
 
@@ -63,13 +64,13 @@ export function Recipe() {
                 </ImgContainer>
                 <Row style={{marginTop: '9px'}}>
                     <UserInfos>
-                        <Avatar src={recipe.avatar} />
+                        <Avatar src={recipe.avatar ? recipe.avatar : defaultImage } />
                         <Username>{recipe.user_name}</Username>
                     </UserInfos>
                     <Review>
                         <Stars>
                             <AiTwotoneStar style={{color: '#FFB660', width: '16px', height: '16px'}} />
-                            <span>{recipe.rating_sum / recipe.review_amount}</span>
+                            <span>{isNaN(recipe.rating_sum / recipe.review_amount) ? 0 : recipe.rating_sum / recipe.review_amount}</span>
                         </Stars>
                         <ReviewsCounter>
                             ({recipe.review_amount} Reviews)

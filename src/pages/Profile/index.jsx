@@ -109,10 +109,10 @@ export function Profile() {
 
                 {isMyProfile ? (
                     <>
-                        {activeButton == 1 ? (
+                        {activeButton == 2 ? (
                             <RecipesList>
-                                {userData.recipe != undefined && userData.recipe.map(recipe => (
-                                    <ProfileRecipeCard key={recipe.id} data={recipe} type={1} />
+                                {userData.recipes != undefined && userData.recipes.map(recipe => (
+                                    <ProfileRecipeCard key={recipe.id} data={recipe} type={2} />
                                 ))}
                             </RecipesList>
                         ) : (
