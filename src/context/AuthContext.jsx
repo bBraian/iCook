@@ -3,15 +3,6 @@ import { createContext, useEffect, useState } from 'react'
 import { api } from '../lib/axios'
 import { destroyCookie, parseCookies, setCookie } from 'nookies'
 
-const fakeUserData = {
-  id: 1,
-  password: '987654',
-  fullName: 'Braian Viacava de Ávila',
-  username: 'braian',
-  email: 'braian@datacode.com.br',
-  photo: ''
-}
-
 const fakeUser = {
   id: 2,
   password: '987654',
@@ -19,21 +10,6 @@ const fakeUser = {
   username: 'braian',
   email: 'braian@datacode.com.br',
   photo: ''
-}
-
-export async function signOut() {
-  const { 'icook.accessToken': access_token } = parseCookies()
-
-  if(access_token) {
-    try {
-      await api.post('/logout')
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  destroyCookie(null, 'icook.accessToken', { path: '/' })
-  return
 }
 
 const AuthContext = createContext()
@@ -86,10 +62,20 @@ const AuthProvider = ({ children }) => {
     return api.get('/user')
   }
 
-  function logout() {
-    signOut()
-    setUser(null)
-    router.push('/login')
+  async function logout() {
+    const { 'icook.accessToken': access_token } = parseCookies()
+
+    if(access_token) {
+    //   try {
+    //     await api.post('/logout')
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+      destroyCookie(null, 'icook.accessToken', { path: '/' })
+      setUser(null)
+    }
+    
+    return
   }
 
   const values = {

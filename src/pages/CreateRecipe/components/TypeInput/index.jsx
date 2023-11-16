@@ -1,17 +1,23 @@
 import { HiArrowRight } from "react-icons/hi2"
 import styled from "styled-components"
+import { TypeModal } from "../TypeModal"
+import { useState } from "react"
 
-export function TypeInput({serves, ...rest}) {
+export function TypeInput({typeId, setTypeId}) {
+    const [modalOpen, setModalOpen] = useState(false)
     return (
-        <Container {...rest}>
-            <Box style={{gap: '16px'}}>
-                <Text>Tipo</Text>
-            </Box>
-            <Box style={{gap: '8px'}}>
-                <Amount>{serves}</Amount>
-                <HiArrowRight style={{color: '#000', width: '18px', height: '18px'}} />
-            </Box>
-        </Container>
+        <>
+            <Container onClick={() => setModalOpen(true)}>
+                <Box style={{gap: '16px'}}>
+                    <Text>Tipo</Text>
+                </Box>
+                <Box style={{gap: '8px'}}>
+                    <Amount>{typeId.name}</Amount>
+                    <HiArrowRight style={{color: '#000', width: '18px', height: '18px'}} />
+                </Box>
+            </Container>
+            <TypeModal modalOpen={modalOpen} setModalOpen={setModalOpen} typeId={typeId} setTypeId={setTypeId} />
+        </>
     )
 }
 

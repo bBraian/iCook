@@ -125,8 +125,9 @@ export function Profile() {
                     </>
                 ) : (
                     <RecipesList>
-                        <ProfileRecipeCard type={3} />
-                        <ProfileRecipeCard type={3} />
+                        {userData.recipes != undefined && userData.recipes.map(recipe => (
+                            <ProfileRecipeCard key={recipe.id} data={recipe} type={3} />
+                        ))}
                     </RecipesList>
                 )}
   

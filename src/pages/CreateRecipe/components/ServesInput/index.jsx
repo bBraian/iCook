@@ -1,21 +1,28 @@
 import { BsFillPeopleFill } from "react-icons/bs"
 import { HiArrowRight } from "react-icons/hi2"
 import styled from "styled-components"
+import { ServesModal } from "../ServesModal"
+import { useState } from "react"
 
-export function ServesInput({serves, ...rest}) {
+export function ServesInput({serves, setServes}) {
+    const [modalOpen, setModalOpen] = useState(false)
     return (
-        <Container {...rest}>
-            <Box style={{gap: '16px'}}>
-                <IconBox>
-                    <BsFillPeopleFill style={{color: '#E23E3E', width: '18px', height: '18px'}} />
-                </IconBox>
-                <Text>Serve</Text>
-            </Box>
-            <Box style={{gap: '8px'}}>
-                <Amount>{serves}</Amount>
-                <HiArrowRight style={{color: '#000', width: '18px', height: '18px'}} />
-            </Box>
-        </Container>
+        <>
+            <Container onClick={() => setModalOpen(true)}>
+                <Box style={{gap: '16px'}}>
+                    <IconBox>
+                        <BsFillPeopleFill style={{color: '#E23E3E', width: '18px', height: '18px'}} />
+                    </IconBox>
+                    <Text>Serve</Text>
+                </Box>
+                <Box style={{gap: '8px'}}>
+                    <Amount>{serves}</Amount>
+                    <HiArrowRight style={{color: '#000', width: '18px', height: '18px'}} />
+                </Box>
+            </Container>
+            <ServesModal modalOpen={modalOpen} setModalOpen={setModalOpen} serves={serves} setServes={setServes} />
+        </>
+
     )
 }
 

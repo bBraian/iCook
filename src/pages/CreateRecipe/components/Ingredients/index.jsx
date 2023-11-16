@@ -3,10 +3,9 @@ import { FaPlus } from "react-icons/fa6";
 import styled from "styled-components";
 import { IngredientsModal } from "../IngredientsModal";
 
-export function Ingredients() {
+export function Ingredients({ingredientsList, setIngredientsList}) {
     const [modalOpen, setModalOpen] = useState(0)
     const [selected, setSelected] = useState({})
-    const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredient: { id: 0, name: 'Ingrediente' }, amount: ''}])
     
     useEffect(() => {
         const updatedIngredients = ingredientsList.map(item => {

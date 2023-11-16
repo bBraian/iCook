@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import styled from "styled-components";
 
-export function Steps() {
-    const [stepsList, setStepsList] = useState([{ id: 1, text: ""}])
+export function Steps({stepsList, setStepsList}) {
     function addNewStep() {
         setStepsList([...stepsList, { id: stepsList[stepsList.length - 1].id + 1, text: ""}])
     }

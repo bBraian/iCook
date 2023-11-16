@@ -1,16 +1,31 @@
 import styled from "styled-components"
 import { MastersCheffsCard } from "../MastersCheffsCard"
+import { useEffect, useState } from "react"
+import { api } from "../../../../lib/axios"
 
 export function MastersCheffs() {
+    const [masterCheffs, setMasterCheffs] = useState([])
+
+    useEffect(() => {
+        getMasterCheffs()
+    }, [])
+
+    async function getMasterCheffs() {
+        try {
+            const {data} = await api.get('user/all')
+            setMasterCheffs(data)
+        } catch (error) {
+            console.log(error)   
+        }
+    }
+
     return (
         <Container>
             <Title>Master's Cheffs</Title>
             <MastersCheffsList>
-                <MastersCheffsCard />
-                <MastersCheffsCard />
-                <MastersCheffsCard />
-                <MastersCheffsCard />
-                <MastersCheffsCard />
+                {masterCheffs.map(cheff => (
+                    <MastersCheffsCard key={cheff.id} data={cheff} />
+                ))}
             </MastersCheffsList>
         </Container>
     )

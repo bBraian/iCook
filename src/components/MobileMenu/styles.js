@@ -34,6 +34,16 @@ export const Avatar = styled.img`
     border-radius: 50%;
 `
 
+export const AnonimoBoxImg = styled.div`
+    width: 50px;
+    height: 50px;
+    background-color: #c4c4c4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+`
+
 export const Box = styled.div`
     display: flex;
     flex-direction: column;

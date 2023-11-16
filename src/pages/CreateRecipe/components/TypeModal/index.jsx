@@ -1,9 +1,12 @@
 import styled from "styled-components"
-import { BsFillPeopleFill } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
-const numberOfPersons = [1,2,3,4,5,6,7,8,9,10];
+const types = [
+    {id: 1, name: 'Normal'},
+    {id: 2, name: 'Vegano'},
+    {id: 3, name: 'Vegetariano'}
+];
 
-export function TypeModal({setModalOpen, modalOpen, serves, setServes}) {
+export function TypeModal({setModalOpen, modalOpen, typeId, setTypeId}) {
 
     if(!modalOpen) {
         return ""
@@ -21,8 +24,8 @@ export function TypeModal({setModalOpen, modalOpen, serves, setServes}) {
                 </CloseButton>
             </Header>
             <ServesCounterList>
-                {numberOfPersons.map(n => (
-                    <Item key={n} selected={serves == n} onClick={() => setServes(n)}>{n}</Item>
+                {types.map(n => (
+                    <Item key={n.id} selected={typeId.id == n.id} onClick={() => setTypeId(n)}>{n.name}</Item>
                 ))}
             </ServesCounterList>
         </Container>
