@@ -10,15 +10,15 @@ export function Ingredients({ingredientsList, setIngredientsList}) {
     useEffect(() => {
         const updatedIngredients = ingredientsList.map(item => {
             if (item.id === modalOpen) {
-                return { ...item, ingredient: selected };
+                return { ...item, ingredientId: selected.id, ingredientImg: selected.img, ingredientName: selected.name };
             }
             return item;
-            });
-            setIngredientsList(updatedIngredients);
+        });
+        setIngredientsList(updatedIngredients);
     }, [selected])
 
     function addNewIngredient() {
-        setIngredientsList([...ingredientsList, { id: ingredientsList[ingredientsList.length - 1].id + 1, ingredient: {id: 1, name: 'Clique para selecionar'}, amount: '0gr'}])
+        setIngredientsList([...ingredientsList, { id: ingredientsList[ingredientsList.length - 1].id + 1, ingredient: {id: 1, name: 'Clique para selecionar'}, amount: ''}])
     }
 
     function removeIngredient(id) {
@@ -49,7 +49,7 @@ export function Ingredients({ingredientsList, setIngredientsList}) {
             <IngredientsBox>
                 {ingredientsList.map(ingredient => (
                     <Row key={ingredient.id}>
-                        <Ingredient onClick={() => openModal(ingredient.id == 0 ? {} : ingredient)}>{ingredient.ingredient.name}</Ingredient>
+                        <Ingredient type="button" onClick={() => openModal(ingredient.id == 0 ? {} : ingredient)}>{ingredient.ingredientName}</Ingredient>
                         <AmountInput value={ingredient.amount} onChange={(e) => handleAmountChange(ingredient.id, e.target.value)} placeholder="Quantidade"></AmountInput>
                         <DeleteIngredientButton onClick={() => removeIngredient(ingredient.id)}>
                             -
@@ -58,7 +58,7 @@ export function Ingredients({ingredientsList, setIngredientsList}) {
                 ))}
    
             </IngredientsBox>
-            <NewIngredientButton onClick={addNewIngredient}>
+            <NewIngredientButton type="button" onClick={addNewIngredient}>
                 <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
                 Novo ingrediente
             </NewIngredientButton>

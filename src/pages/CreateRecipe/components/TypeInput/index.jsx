@@ -21,7 +21,7 @@ export function TypeInput({typeId, setTypeId}) {
     )
 }
 
-const Container = styled.button`
+const Container = styled.div`
     margin-top: 16px;
     width: 100%;
     height: 60px;

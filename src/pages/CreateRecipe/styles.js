@@ -2,8 +2,8 @@ import styled from "styled-components"
 
 export const FormContainer = styled.form`
     padding: 0 1rem;
-    margin-top: 92px;
-    margin-bottom: 2rem;
+    max-width: 900px;
+    margin: 92px auto 2rem auto;
 `
 
 export const Row = styled.div`

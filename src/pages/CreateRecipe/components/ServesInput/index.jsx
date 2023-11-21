@@ -26,7 +26,7 @@ export function ServesInput({serves, setServes}) {
     )
 }
 
-const Container = styled.button`
+const Container = styled.div`
     margin-top: 16px;
     width: 100%;
     height: 60px;

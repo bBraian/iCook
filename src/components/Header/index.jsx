@@ -8,15 +8,17 @@ import { MobileMenu } from "../MobileMenu";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import defaultImg from '../../assets/avatar.png'
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
     return (
         <Container>
             <Title to="/">iCook</Title>
             <Box>
-                <SmallButton text="Nova receita" icon={<BiPlus style={{color: '#EE8B8B', width: '20px', height: '20px'}} />} />
+                <SmallButton text="Nova receita" onClick={() => navigate('/criar-receita')} icon={<BiPlus style={{color: '#EE8B8B', width: '20px', height: '20px'}} />} />
                 {user ? (
                     <HeaderButton>
                         {user.avatar ? (

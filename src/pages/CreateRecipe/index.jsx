@@ -46,7 +46,7 @@ export function CreateRecipe() {
             <FormContainer onSubmit={handleSaveRecipe}>
                 <ImgContainer>
                     <Img src="https://img.freepik.com/fotos-premium/prato-de-comida-brasileira-em-fundo-fotografico_496782-1085.jpg" />
-                    <EditImage>
+                    <EditImage type="button">
                         <FiEdit3 style={{color: '#E23E3E', width: '18px', height: '18px'}} />
                     </EditImage>
                 </ImgContainer>

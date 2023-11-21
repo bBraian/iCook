@@ -37,7 +37,7 @@ export function Steps({stepsList, setStepsList}) {
                 ))}
                
             </IngredientsBox>
-            <NewIngredientButton onClick={addNewStep}>
+            <NewIngredientButton type="button" onClick={addNewStep}>
                 <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
                 Novo passo
             </NewIngredientButton>

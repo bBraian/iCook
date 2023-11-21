@@ -36,6 +36,7 @@ export function ServesModal({setModalOpen, modalOpen, serves, setServes}) {
 }
 
 const Container = styled.div`
+    max-width: 700px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -105,7 +106,7 @@ const Item = styled.div`
     transition: background-color ease-in-out 0.2s;
 
     &:hover {
-        background-color: #E8E8E8;
+        background-color: ${props => props.selected ? '#C1C1C1' : '#E8E8E8'};
     }
 
     color: var(--neutral-90, #303030);
