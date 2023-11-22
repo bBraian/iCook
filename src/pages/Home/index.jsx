@@ -22,4 +22,5 @@ export function Home() {
 const Body = styled.div`
     padding: 0 1rem;
     margin: 0 auto;
+    max-width: 1200px;
 `

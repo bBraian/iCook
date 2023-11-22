@@ -9,16 +9,38 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import defaultImg from '../../assets/avatar.png'
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
+
+    function handleNavigateToCreateRecipe() {
+        if(!user) {
+            Swal.fire({
+                title: "É preciso estar logado para criar uma receita!",
+                text: "Faça login para continuar",
+                icon: "warning",
+                confirmButtonText: "Fazer login",
+                confirmButtonColor: "#3085d6",
+                showDenyButton: true,
+                denyButtonText: "Cancelar"
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    navigate('/login')
+                }
+            });
+        } else {
+            navigate('/criar-receita')
+        }
+    }
+
     return (
         <Container>
             <Title to="/">iCook</Title>
             <Box>
-                <SmallButton text="Nova receita" onClick={() => navigate('/criar-receita')} icon={<BiPlus style={{color: '#EE8B8B', width: '20px', height: '20px'}} />} />
+                <SmallButton text="Nova receita" onClick={handleNavigateToCreateRecipe} icon={<BiPlus style={{color: '#EE8B8B', width: '20px', height: '20px'}} />} />
                 {user ? (
                     <HeaderButton>
                         {user.avatar ? (

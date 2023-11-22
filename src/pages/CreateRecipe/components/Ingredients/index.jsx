@@ -18,7 +18,7 @@ export function Ingredients({ingredientsList, setIngredientsList}) {
     }, [selected])
 
     function addNewIngredient() {
-        setIngredientsList([...ingredientsList, { id: ingredientsList[ingredientsList.length - 1].id + 1, ingredient: {id: 1, name: 'Clique para selecionar'}, amount: ''}])
+        setIngredientsList([...ingredientsList, { id: ingredientsList[ingredientsList.length - 1].id + 1, ingredientId: 0, ingredientImg: '', ingredientName: 'Clique para selecionar', amount: '' }])
     }
 
     function removeIngredient(id) {

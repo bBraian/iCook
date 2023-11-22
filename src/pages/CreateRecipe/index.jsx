@@ -6,10 +6,14 @@ import { Ingredients } from "./components/Ingredients"
 import { ServesInput } from "./components/ServesInput"
 import { Steps } from "./components/Steps"
 import { FormContainer, CookTimeBox, EditImage, Img, ImgContainer, InputTime, InputsBox, Row, Span, Title, TitleInput } from "./styles"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CategoryInput } from "./components/CategoryInput"
 import { TypeInput } from "./components/TypeInput"
 import { IsPrivateSwitch } from "./components/IsPrivateSwitch"
+import { AuthContext } from "../../context/AuthContext"
+import Swal from "sweetalert2"
+import { useNavigate } from "react-router-dom"
+import Loading from "../../components/Loading"
 
 
 export function CreateRecipe() {
@@ -19,9 +23,31 @@ export function CreateRecipe() {
     const [typeId, setTypeId] = useState({id: 0, name: 'Selecione o tipo'})
     const [cookTime, setCookTime] = useState("")
     const [isPrivate, setIsPrivate] = useState(true)
+    const { user, loading } = useContext(AuthContext)
+    const navigate = useNavigate()
 
-    const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredient: { id: 0, name: 'Ingrediente' }, amount: ''}])
+    const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredientId: 0, ingredientImg: '', ingredientName: 'Clique para selecionar', amount: ''}])
     const [stepsList, setStepsList] = useState([{ id: 1, text: ""}])
+
+    useEffect(() => {
+        if(!user && !loading) {
+            Swal.fire({
+                title: "É preciso estar logado para criar uma receita!",
+                text: "Faça login para continuar",
+                icon: "warning",
+                confirmButtonText: "Fazer login",
+                confirmButtonColor: "#3085d6",
+                showDenyButton: true,
+                denyButtonText: "Voltar para Home"
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    navigate('/login')
+                } else {
+                    navigate('/')
+                }
+            });
+        }
+    }, [user])
 
     function handleSaveRecipe(event) {
         event.preventDefault()
@@ -40,6 +66,13 @@ export function CreateRecipe() {
 
         console.log(data)
     }
+
+    if(loading) {
+        return (
+            <Loading />
+        )
+    }
+
     return (
         <>
             <Header />

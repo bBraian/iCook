@@ -60,80 +60,82 @@ export function Profile() {
     return (
         <>
             <Header />
-            <Container>
-                <Row>
-                    <Avatar src={userData.avatar ? userData.avatar : defautAvatar} />
-                    {isEditting ? (
-                        <>
-                            <CancelBtn onClick={cancelUserEdit}>Cancelar</CancelBtn>
-                            <Button onClick={handleSaveProfile}>Salvar Perfil</Button>
-                        </>
-                    ) : (
-                        <>
-                            {isMyProfile ? (
-                                <LinkButton onClick={() => setIsEditting(true)}>Editar Perfil</LinkButton>
-                            ) : (<></>)}
-                        </>
-                    )}
-                </Row>
-                <Row style={{marginTop: '16px'}}>
-                    {isEditting ? (
-                        <UsernameInput value={userData.name} onChange={(e) => setUserdata({...userData, name: e.target.value})} />
-                    ) : (
-                        <>
-                            <Username>{userData.name}</Username>
-                            <RecipeCounter>2 receitas</RecipeCounter>
-                        </>
-                    )}
-                </Row>
-                {isEditting ? (
-                    <DescriptionInput rows={3} value={userData.description} onChange={(e) => setUserdata({...userData, description: e.target.value})} />
-                ) : (
-                    <Description>{userData.description}</Description>
-                )}
-                
-            </Container>
-            <Divider />
-            <RecipesContainer>
-                <ButtonsBox ismyprofile={isMyProfile ? 'S' : 'N'} >
-                    { isMyProfile ? (
-                        <>
-                            <RecipesButton active={activeButton == 1 ? 's' : 'n'} onClick={() => setActiveButton(1)}>Receitas salvas</RecipesButton>
-                            <RecipesButton active={activeButton == 2 ? 's' : 'n'} onClick={() => setActiveButton(2)}>Minhas receitas</RecipesButton>
-                        </>
-                    ) : (
-                        <RecipesButton active="s">Receitas de {userData.name != undefined && userData.name.split(' ')[0]}</RecipesButton>
-                    ) }
-                </ButtonsBox>
-
-
-                {isMyProfile ? (
-                    <>
-                        {activeButton == 2 ? (
-                            <RecipesList>
-                                {userData.recipes != undefined && userData.recipes.map(recipe => (
-                                    <ProfileRecipeCard key={recipe.id} data={recipe} type={2} />
-                                ))}
-                            </RecipesList>
+            <div style={{maxWidth: '900px', margin: '0 auto'}}>
+                <Container>
+                    <Row>
+                        <Avatar src={userData.avatar ? userData.avatar : defautAvatar} />
+                        {isEditting ? (
+                            <>
+                                <CancelBtn onClick={cancelUserEdit}>Cancelar</CancelBtn>
+                                <Button onClick={handleSaveProfile}>Salvar Perfil</Button>
+                            </>
                         ) : (
-                            <RecipesList>
-                                {userData.saved_recipes != undefined && userData.saved_recipes.map(savedRecipes => (
-                                    <ProfileRecipeCard key={savedRecipes.id} data={savedRecipes} type={1} />
-                                ))}
-                            </RecipesList>
+                            <>
+                                {isMyProfile ? (
+                                    <LinkButton onClick={() => setIsEditting(true)}>Editar Perfil</LinkButton>
+                                ) : (<></>)}
+                            </>
                         )}
-                    </>
-                ) : (
-                    <RecipesList>
-                        {userData.recipes != undefined && userData.recipes.map(recipe => (
-                            <ProfileRecipeCard key={recipe.id} data={recipe} type={3} />
-                        ))}
-                    </RecipesList>
-                )}
-  
+                    </Row>
+                    <Row style={{marginTop: '16px'}}>
+                        {isEditting ? (
+                            <UsernameInput value={userData.name} onChange={(e) => setUserdata({...userData, name: e.target.value})} />
+                        ) : (
+                            <>
+                                <Username>{userData.name}</Username>
+                                <RecipeCounter>2 receitas</RecipeCounter>
+                            </>
+                        )}
+                    </Row>
+                    {isEditting ? (
+                        <DescriptionInput rows={3} value={userData.description} onChange={(e) => setUserdata({...userData, description: e.target.value})} />
+                    ) : (
+                        <Description>{userData.description}</Description>
+                    )}
+                    
+                </Container>
+                <Divider />
+                <RecipesContainer>
+                    <ButtonsBox ismyprofile={isMyProfile ? 'S' : 'N'} >
+                        { isMyProfile ? (
+                            <>
+                                <RecipesButton active={activeButton == 1 ? 's' : 'n'} onClick={() => setActiveButton(1)}>Receitas salvas</RecipesButton>
+                                <RecipesButton active={activeButton == 2 ? 's' : 'n'} onClick={() => setActiveButton(2)}>Minhas receitas</RecipesButton>
+                            </>
+                        ) : (
+                            <RecipesButton active="s">Receitas de {userData.name != undefined && userData.name.split(' ')[0]}</RecipesButton>
+                        ) }
+                    </ButtonsBox>
 
 
-            </RecipesContainer>
+                    {isMyProfile ? (
+                        <>
+                            {activeButton == 2 ? (
+                                <RecipesList>
+                                    {userData.recipes != undefined && userData.recipes.map(recipe => (
+                                        <ProfileRecipeCard key={recipe.id} data={recipe} type={2} />
+                                    ))}
+                                </RecipesList>
+                            ) : (
+                                <RecipesList>
+                                    {userData.saved_recipes != undefined && userData.saved_recipes.map(savedRecipes => (
+                                        <ProfileRecipeCard key={savedRecipes.id} data={savedRecipes} type={1} />
+                                    ))}
+                                </RecipesList>
+                            )}
+                        </>
+                    ) : (
+                        <RecipesList>
+                            {userData.recipes != undefined && userData.recipes.map(recipe => (
+                                <ProfileRecipeCard key={recipe.id} data={recipe} type={3} />
+                            ))}
+                        </RecipesList>
+                    )}
+    
+
+
+                </RecipesContainer>
+            </div>
         </>
     )
 }

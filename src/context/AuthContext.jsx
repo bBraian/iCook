@@ -3,34 +3,24 @@ import { createContext, useEffect, useState } from 'react'
 import { api } from '../lib/axios'
 import { destroyCookie, parseCookies, setCookie } from 'nookies'
 
-const fakeUser = {
-  id: 2,
-  password: '987654',
-  fullName: 'Braian Viacava de Ávila',
-  username: 'braian',
-  email: 'braian@datacode.com.br',
-  photo: ''
-}
-
 const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  console.log(user)
 
   useEffect(() => {
     async function initApp() {
-        const { 'icook.accessToken': access_token } = parseCookies()
+      const { 'icook.accessToken': access_token } = parseCookies()
 
-        if(access_token) {
-            api.defaults.headers['Authorization'] = access_token
-            const res = await getUser()
-    
-            setUser(res.data[0])
-            setLoading(false)
-        }
+      if(access_token) {
+        api.defaults.headers['Authorization'] = access_token
+        const res = await getUser()
+
+        setUser(res.data[0])
         setLoading(false)
+      }
+      setLoading(false)
     }
     initApp()
   }, [])
@@ -80,6 +70,7 @@ const AuthProvider = ({ children }) => {
 
   const values = {
     user,
+    loading,
     signIn,
     logout
   }
