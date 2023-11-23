@@ -14,6 +14,7 @@ import { AuthContext } from "../../context/AuthContext"
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
 import Loading from "../../components/Loading"
+import { api } from "../../lib/axios"
 
 
 export function CreateRecipe() {
@@ -65,6 +66,21 @@ export function CreateRecipe() {
         }
 
         console.log(data)
+
+        api.post('/recipe', data)
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            Swal.fire({
+                title: "Atenção!",
+                text: err.response.data.message,
+                icon: "warning",
+                confirmButtonText: "ok",
+                confirmButtonColor: "#3085d6",
+            })
+            console.log(err)
+        })
     }
 
     if(loading) {
