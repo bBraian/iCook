@@ -1,40 +1,34 @@
 import styled from "styled-components"
 import { TrendingCard } from "../TrendingCard"
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { api } from "../../../../lib/axios";
+import defaultImage from "../../../../assets/avatar.png"
 
 export function Trending() {
+    const [trending, setTrending] = useState([])
+
+    useEffect(() => {
+        getTrending()
+    }, [])
+
+    async function getTrending() {
+        const { data } = await api.get('recipe/trending')
+        setTrending(data)
+    }
     return (
         <Container>
             <Title>Trending 🔥</Title>
             <CardList>
-                <TrendingCardBox>
-                    <TrendingCard />
-                    <Creator to="profile/1">
-                        <Avatar src="https://s2-techtudo.glbimg.com/zAVzm6CbZ6VSmpDe76jhK7Qx73E=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/u/G/eQpsXGQB6xTlFlvJsUOw/avatar-a-lenda-de-aang.jpg" />
-                        <Username>Por Niki Samantha</Username>
-                    </Creator>
-                </TrendingCardBox>
-                <TrendingCardBox>
-                    <TrendingCard />
-                    <Creator to="profile/1">
-                        <Avatar src="https://s2-techtudo.glbimg.com/zAVzm6CbZ6VSmpDe76jhK7Qx73E=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/u/G/eQpsXGQB6xTlFlvJsUOw/avatar-a-lenda-de-aang.jpg" />
-                        <Username>Por Niki Samantha</Username>
-                    </Creator>
-                </TrendingCardBox>
-                <TrendingCardBox>
-                    <TrendingCard />
-                    <Creator to="profile/1">
-                        <Avatar src="https://s2-techtudo.glbimg.com/zAVzm6CbZ6VSmpDe76jhK7Qx73E=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/u/G/eQpsXGQB6xTlFlvJsUOw/avatar-a-lenda-de-aang.jpg" />
-                        <Username>Por Niki Samantha</Username>
-                    </Creator>
-                </TrendingCardBox>
-                <TrendingCardBox>
-                    <TrendingCard />
-                    <Creator to="profile/1">
-                        <Avatar src="https://s2-techtudo.glbimg.com/zAVzm6CbZ6VSmpDe76jhK7Qx73E=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/u/G/eQpsXGQB6xTlFlvJsUOw/avatar-a-lenda-de-aang.jpg" />
-                        <Username>Por Niki Samantha</Username>
-                    </Creator>
-                </TrendingCardBox>
+                {trending.map(recipe => (
+                    <TrendingCardBox key={recipe.id}>
+                        <TrendingCard data={recipe} />
+                        <Creator to="profile/1">
+                            <Avatar src={recipe.avatar ? recipe.avatar : defaultImage} />
+                            <Username>Por {recipe.user_name}</Username>
+                        </Creator>
+                    </TrendingCardBox>
+                ))}
             </CardList>
         </Container>
     )

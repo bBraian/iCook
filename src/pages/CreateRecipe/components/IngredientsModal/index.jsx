@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { AiOutlineClose } from "react-icons/ai"
 import { FaPlus } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+import { api } from "../../../../lib/axios";
 const fakeIngredients = [
     { id: 1, name: "Pimenta", img: "https://static.vecteezy.com/system/resources/thumbnails/024/781/978/small/chili-illustration-icon-free-png.png"},
     { id: 2, name: "Sal", img: "https://cdn-icons-png.flaticon.com/512/526/526228.png"},
@@ -14,6 +15,16 @@ const fakeIngredients = [
 export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected}) {
     const [search, setSearch] = useState('')
     const [filteredIngredients, setFilteredIngredients] = useState({})
+    const [ingredients, setIngredients] = useState({})
+    console.log(ingredients)
+    useEffect(() => {
+        getIngredients()
+    }, [])
+
+    async function getIngredients() {
+        const { data } = await api.get('ingredients/all')
+        setIngredients(data)
+    }
 
     function handleCloseModal() {
         setSelected({})
@@ -23,7 +34,7 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
 
     useEffect(() => {
         if(search) {
-            let filter = fakeIngredients.filter(ingredient => ingredient.name.toLowerCase().includes(search.toLowerCase()))
+            let filter = ingredients.filter(ingredient => ingredient.name.toLowerCase().includes(search.toLowerCase()))
             setFilteredIngredients(filter.length > 0 ? filter : {})
         }
     }, [search])
@@ -50,7 +61,7 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
                                 <>
                                     {filteredIngredients.map(ingredient => (
                                         <Item key={ingredient.id} selected={selected.id == ingredient.id} onClick={() => setSelected(ingredient)}>
-                                            <Img src={ingredient.img} />
+                                            <Img src={ingredient.image} />
                                             {ingredient.name}
                                         </Item>
                                     ))}
@@ -69,9 +80,9 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
                        
                     ) : (
                         <>
-                            {fakeIngredients.map(ingredient => (
+                            {ingredients.map(ingredient => (
                                 <Item key={ingredient.id} selected={selected.id == ingredient.id} onClick={() => setSelected(ingredient)}>
-                                    <Img src={ingredient.img} />
+                                    <Img src={ingredient.image} />
                                     {ingredient.name}
                                 </Item>
                             ))}

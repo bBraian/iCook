@@ -2,10 +2,10 @@ import { BottomBox, Container, Img, Infos, SaveBoxIcon, ShadowEffect, Stars, Tit
 import { AiTwotoneStar } from "react-icons/ai"
 import { BsBookmarkDash } from "react-icons/bs"
 
-export function TrendingCard() {
+export function TrendingCard({ data }) {
     return (
-        <Container to="/receita/1" >
-            <Img src="https://img.freepik.com/fotos-premium/prato-de-comida-brasileira-em-fundo-fotografico_496782-1085.jpg" />
+        <Container to={`/receita/${data.id}`} >
+            <Img src={data.image} />
             <ShadowEffect />
             <TopBox>
                 <Stars>
@@ -17,8 +17,8 @@ export function TrendingCard() {
                 </SaveBoxIcon>
             </TopBox>
             <BottomBox>
-                <Title>Como fazer italiano espaguete em casa</Title>
-                <Infos>12 Ingredients | 40 min</Infos>
+                <Title>{data.title}</Title>
+                <Infos>{data.ingredients_amount} Ingredients | {data.kitchen_time}</Infos>
             </BottomBox>
         </Container>
     )
