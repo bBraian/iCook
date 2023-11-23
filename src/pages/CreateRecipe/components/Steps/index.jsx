@@ -30,7 +30,7 @@ export function Steps({stepsList, setStepsList}) {
                 {stepsList.map(step => (
                     <Row key={step.id}>
                         <Ingredient placeholder={`Passo ${step.id}`} value={step.name} onChange={(e) => handleTextChange(step.id, e.target.value)} />
-                        <DeleteIngredientButton onClick={() => removeStep(step.id)}>
+                        <DeleteIngredientButton type="button" onClick={() => removeStep(step.id)}>
                             -
                         </DeleteIngredientButton>
                     </Row>

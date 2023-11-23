@@ -83,7 +83,7 @@ export function Profile() {
                         ) : (
                             <>
                                 <Username>{userData.name}</Username>
-                                <RecipeCounter>2 receitas</RecipeCounter>
+                                <RecipeCounter>{userData.recipes.length} receitas</RecipeCounter>
                             </>
                         )}
                     </Row>

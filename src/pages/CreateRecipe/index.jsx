@@ -15,6 +15,7 @@ import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
 import Loading from "../../components/Loading"
 import { api } from "../../lib/axios"
+import { TransparentLoading } from "../../components/TransparentLoading"
 
 
 export function CreateRecipe() {
@@ -25,6 +26,7 @@ export function CreateRecipe() {
     const [cookTime, setCookTime] = useState("")
     const [isPrivate, setIsPrivate] = useState(true)
     const { user, loading } = useContext(AuthContext)
+    const [postRecipe, setPostRecipe] = useState(false);
     const navigate = useNavigate()
 
     const [ingredientsList, setIngredientsList] = useState([{ id: 1, ingredientId: 0, ingredientImg: '', ingredientName: 'Clique para selecionar', amount: ''}])
@@ -52,6 +54,7 @@ export function CreateRecipe() {
 
     function handleSaveRecipe(event) {
         event.preventDefault()
+        setPostRecipe(true)
 
         const data = {
             title,
@@ -70,8 +73,28 @@ export function CreateRecipe() {
         api.post('/recipe', data)
         .then((res) => {
             console.log(res)
+            setPostRecipe(false)
+            if(res.data.id) {
+                Swal.fire({
+                    title: "Receita criada com sucesso!",
+                    icon: "success",
+                    confirmButtonText: "Ir para a receita",
+                    confirmButtonColor: "#3085d6",
+                }).then(() => {
+                    navigate(`/receita/${res.data.id}`)
+                });
+            } else {
+                Swal.fire({
+                    title: "Atenção!",
+                    text: "Erro ao criar receita",
+                    icon: "warning",
+                    confirmButtonText: "ok",
+                    confirmButtonColor: "#3085d6",
+                })
+            }
         })
         .catch((err) => {
+            setPostRecipe(false)
             Swal.fire({
                 title: "Atenção!",
                 text: err.response.data.message,
@@ -116,6 +139,7 @@ export function CreateRecipe() {
                 <Steps stepsList={stepsList} setStepsList={setStepsList} />
                 <LargeButton text="Salvar Receita" type="submit" config="primary" style={{width: '100%'}} />
             </FormContainer>
+            {postRecipe && <TransparentLoading /> }
         </>
     )
 }

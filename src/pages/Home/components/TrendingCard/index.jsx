@@ -3,6 +3,7 @@ import { AiTwotoneStar } from "react-icons/ai"
 import { BsBookmarkDash } from "react-icons/bs"
 
 export function TrendingCard({ data }) {
+    console.log(data)
     return (
         <Container to={`/receita/${data.id}`} >
             <Img src={data.image} />
@@ -17,7 +18,7 @@ export function TrendingCard({ data }) {
                 </SaveBoxIcon>
             </TopBox>
             <BottomBox>
-                <Title>{data.title}</Title>
+                <Title>{data.name}</Title>
                 <Infos>{data.ingredients_amount} Ingredients | {data.kitchen_time}</Infos>
             </BottomBox>
         </Container>

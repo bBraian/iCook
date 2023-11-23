@@ -51,7 +51,7 @@ export function Ingredients({ingredientsList, setIngredientsList}) {
                     <Row key={ingredient.id}>
                         <Ingredient type="button" onClick={() => openModal(ingredient.id == 0 ? {} : ingredient)}>{ingredient.ingredientName}</Ingredient>
                         <AmountInput value={ingredient.amount} onChange={(e) => handleAmountChange(ingredient.id, e.target.value)} placeholder="Quantidade"></AmountInput>
-                        <DeleteIngredientButton onClick={() => removeIngredient(ingredient.id)}>
+                        <DeleteIngredientButton type="button" onClick={() => removeIngredient(ingredient.id)}>
                             -
                         </DeleteIngredientButton>
                     </Row>
