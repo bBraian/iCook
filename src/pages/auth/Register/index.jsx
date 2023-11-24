@@ -5,6 +5,7 @@ import { HiOutlineUser } from 'react-icons/hi2'
 import Swal from "sweetalert2";
 import { api } from "../../../lib/axios";
 import { useNavigate } from "react-router-dom";
+import TransparentLoading from "../../../components/TransparentLoading";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -21,6 +22,7 @@ const Toast = Swal.mixin({
 export function Register() {
   const [avatar, setAvatar] = useState()
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '', avatar: '' })
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate();
 
@@ -42,6 +44,7 @@ export function Register() {
 
   async function handleSubmit(event) {
     event.preventDefault()
+    setIsLoading(true)
 
     if(form.password !== form.confirmPassword) {
       Toast.fire({
@@ -67,6 +70,7 @@ export function Register() {
 
     api.post('/user', { name: form.name, email: form.email, password: form.password })
     .then((response) => {
+      setIsLoading(false)
       console.log(response)
       if(response.status === 201) {
         Swal.fire({
@@ -86,6 +90,7 @@ export function Register() {
       }
     })
     .catch((error) => {
+      setIsLoading(false)
       if(error.response.data.message.isArray) {
         error.response.data.message.map(err => {
           Toast.fire({
@@ -125,6 +130,7 @@ export function Register() {
         <LargeButton text="CRIAR" config="secondary" style={{width: '320px'}} type="submit" />
         <SignUpLink to="/login">Ja tem conta? Logar-se</SignUpLink>
       </LoginForm>
+      {isLoading && <TransparentLoading />}
     </Container>
   );
 };

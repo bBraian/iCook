@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { api } from "../../../lib/axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../context/AuthContext";
+import TransparentLoading from "../../../components/TransparentLoading";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -21,13 +22,16 @@ const Toast = Swal.mixin({
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoadingAuth, setIsLoadingAuth] = useState(false)
   const { signIn } = useContext(AuthContext)
   const navigate = useNavigate();
 
   function handleLogin(event) {
     event.preventDefault()
+    setIsLoadingAuth(true)
     api.post('/login', { email, password })
     .then((response) => {
+      setIsLoadingAuth(false)
       console.log(response)
       if(response.status === 200) {
         signIn(response.data.access_token)
@@ -56,6 +60,7 @@ export function Login() {
       }
     })
     .catch((error) => {
+      setIsLoadingAuth(false)
       console.log(error)
       if(error.response.data.message) {
         Toast.fire({
@@ -83,6 +88,7 @@ export function Login() {
         <LargeButton text="LOGAR" config="secondary" type="submit" />
         <SignUpLink to="/register">Não tem conta. Registre-se</SignUpLink>
       </LoginForm>
+      {isLoadingAuth && <TransparentLoading />}
     </Container>
   );
 };

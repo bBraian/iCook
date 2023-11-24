@@ -9,6 +9,11 @@ export function ServesModal({setModalOpen, modalOpen, serves, setServes}) {
         return ""
     }
 
+    function handleSelectItem(item) {
+        setServes(item)
+        setModalOpen(false)
+    }
+
     return (
         <>
             <Container>
@@ -25,7 +30,7 @@ export function ServesModal({setModalOpen, modalOpen, serves, setServes}) {
             </Header>
             <ServesCounterList>
                 {numberOfPersons.map(n => (
-                    <Item key={n} selected={serves == n} onClick={() => setServes(n)}>{n}</Item>
+                    <Item key={n} selected={serves == n} onClick={() => handleSelectItem(n)}>{n}</Item>
                 ))}
             </ServesCounterList>
         </Container>
@@ -93,9 +98,9 @@ const ServesCounterList = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 10px;
-    margin-bottom: 14px;
     gap: 5px;
-    height: 150px;
+    padding-bottom: 14px;
+    max-height: 250px;
 `
 const Item = styled.div`
     background-color: ${props => props.selected ? '#C1C1C1' : '#F1F1F1'};

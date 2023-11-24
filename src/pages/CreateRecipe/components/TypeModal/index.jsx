@@ -12,6 +12,11 @@ export function TypeModal({setModalOpen, modalOpen, typeId, setTypeId}) {
         return ""
     }
 
+    function handleSelectType(type) {
+        setTypeId(type)
+        setModalOpen(false)
+    }
+
     return (
         <>
             <Container>
@@ -25,7 +30,7 @@ export function TypeModal({setModalOpen, modalOpen, typeId, setTypeId}) {
             </Header>
             <ServesCounterList>
                 {types.map(n => (
-                    <Item key={n.id} selected={typeId.id == n.id} onClick={() => setTypeId(n)}>{n.name}</Item>
+                    <Item key={n.id} selected={typeId.id == n.id} onClick={() => handleSelectType(n)}>{n.name}</Item>
                 ))}
             </ServesCounterList>
         </Container>
@@ -36,6 +41,7 @@ export function TypeModal({setModalOpen, modalOpen, typeId, setTypeId}) {
 }
 
 const Container = styled.div`
+    max-width: 700px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -61,15 +67,6 @@ const Box = styled.div`
     align-items: center;
     gap: 7px;
 `
-const IconBox = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${props => props.theme['white-0']};
-    border-radius: 10px;
-    width: 32px;
-    height: 32px;
-`
 const Text = styled.span`
     color: var(--neutral-90, #303030);
     font-size: 16px;
@@ -92,9 +89,9 @@ const ServesCounterList = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 10px;
-    margin-bottom: 14px;
     gap: 5px;
-    height: 150px;
+    padding-bottom: 14px;
+    max-height: 250px;
 `
 const Item = styled.div`
     background-color: ${props => props.selected ? '#C1C1C1' : '#F1F1F1'};

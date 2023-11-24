@@ -14,6 +14,11 @@ export function CategoryModal({setModalOpen, modalOpen, categoryId, setCategoryI
         return ""
     }
 
+    function handleSelectCategory(category) {
+        setCategoryId(category)
+        setModalOpen(false)
+    }
+
     return (
         <>
             <Container>
@@ -27,7 +32,7 @@ export function CategoryModal({setModalOpen, modalOpen, categoryId, setCategoryI
             </Header>
             <ServesCounterList>
                 {categories.map(category => (
-                    <Item key={category.id} selected={categoryId.id == category.id} onClick={() => setCategoryId(category)}>{category.name}</Item>
+                    <Item key={category.id} selected={categoryId.id == category.id} onClick={() => handleSelectCategory(category)}>{category.name}</Item>
                 ))}
             </ServesCounterList>
         </Container>
@@ -95,9 +100,9 @@ const ServesCounterList = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 10px;
-    margin-bottom: 14px;
     gap: 5px;
-    height: 150px;
+    padding-bottom: 14px;
+    max-height: 250px;
 `
 const Item = styled.div`
     background-color: ${props => props.selected ? '#C1C1C1' : '#F1F1F1'};

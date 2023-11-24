@@ -3,20 +3,12 @@ import { AiOutlineClose } from "react-icons/ai"
 import { FaPlus } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { api } from "../../../../lib/axios";
-const fakeIngredients = [
-    { id: 1, name: "Pimenta", img: "https://static.vecteezy.com/system/resources/thumbnails/024/781/978/small/chili-illustration-icon-free-png.png"},
-    { id: 2, name: "Sal", img: "https://cdn-icons-png.flaticon.com/512/526/526228.png"},
-    { id: 3, name: "Alface", img: "https://images.squarespace-cdn.com/content/v1/5b8edfa12714e508f756f481/1543944726778-3R28J0BST06GRZCOF7UR/alface-crespa-verde-hidropo%CC%82nica.png?format=1000w"},
-    { id: 4, name: "Tomate", img: "https://static.vecteezy.com/system/resources/previews/013/442/147/non_2x/tomatoes-on-a-transparent-background-free-png.png"},
-    { id: 5, name: "Bacon", img: "https://i.pinimg.com/originals/99/52/01/995201e1c92ca9eced42364ed8a1892c.png"},
-    { id: 6, name: "Pão", img: "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25206_1280.png"},
-];
 
 export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected}) {
     const [search, setSearch] = useState('')
     const [filteredIngredients, setFilteredIngredients] = useState({})
     const [ingredients, setIngredients] = useState({})
-    console.log(ingredients)
+    console.log(selected)
     useEffect(() => {
         getIngredients()
     }, [])
@@ -43,6 +35,10 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
         return ""
     }
 
+    function handleSelectIngredient(ingredient) {
+        setSelected(ingredient)
+    }
+
     return (
         <>
             <Container>
@@ -60,7 +56,7 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
                             {filteredIngredients.length > 0 ? (
                                 <>
                                     {filteredIngredients.map(ingredient => (
-                                        <Item key={ingredient.id} selected={selected.id == ingredient.id} onClick={() => setSelected(ingredient)}>
+                                        <Item key={ingredient.id} selected={selected.id == ingredient.id} onClick={() => handleSelectIngredient(ingredient)}>
                                             <Img src={ingredient.image} />
                                             {ingredient.name}
                                         </Item>
@@ -81,7 +77,7 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
                     ) : (
                         <>
                             {ingredients.map(ingredient => (
-                                <Item key={ingredient.id} selected={selected.id == ingredient.id} onClick={() => setSelected(ingredient)}>
+                                <Item key={ingredient.id} selected={selected.id == ingredient.id} onClick={() => handleSelectIngredient(ingredient)}>
                                     <Img src={ingredient.image} />
                                     {ingredient.name}
                                 </Item>
@@ -90,6 +86,9 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
                     )}
                     
                 </IngredientsList>
+                <Box>
+                    <ConfirmButton type="button" onClick={handleCloseModal}>Confirmar ingrediente</ConfirmButton>
+                </Box>
             </Container>
             <Overlay onClick={handleCloseModal} />
         </>
@@ -178,14 +177,14 @@ const CloseButton = styled.button`
     }
 `
 const IngredientsList = styled.div`
-    overflow-x: scroll;
+    overflow-y: scroll;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
     padding: 15px 32px 22px 32px;
-    height: 150px;
+    max-height: 250px;
 `
 const Item = styled.div`
     background-color: ${props => props.selected ? '#C1C1C1' : '#F1F1F1'};
@@ -193,7 +192,8 @@ const Item = styled.div`
     display: flex;
     gap: 4px;
     flex-direction: column;
-    width: 80px;
+    width: 110px;
+    text-align: center;
     height: 85px;
     align-items: center;
     justify-content: center;
@@ -218,4 +218,21 @@ const Overlay = styled.div`
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 88;
+`;
+const Box = styled.div`
+    display: flex;
+    margin: 12px auto;
+`;
+const ConfirmButton = styled.button`
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: ${props => props.theme['primary-50']};
+    border: 1px solid ${props => props.theme['primary-50']};
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.60px;
 `;
