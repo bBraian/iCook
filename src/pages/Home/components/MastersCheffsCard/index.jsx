@@ -13,7 +13,7 @@ export function MastersCheffsCard({data}) {
                     <Row>
                         <Stars>
                             <AiTwotoneStar style={{color: '#FFB660', width: '16px', height: '16px'}} />
-                            <span>{isNaN(data.rating_sum / data.review_amount) ? 0 : data.rating_sum / data.review_amount}</span>
+                            <span>{isNaN(data.rating_sum / data.rating_count) ? 0 : data.rating_sum / data.rating_count}</span>
                         </Stars>
                         <ReviewsCounter>
                             ({data.rating_count} Reviews)
