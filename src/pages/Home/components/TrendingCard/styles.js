@@ -65,6 +65,11 @@ export const SaveBoxIcon = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 `
 
 export const BottomBox = styled.div`

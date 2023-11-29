@@ -14,6 +14,7 @@ const LoadingOverlay = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 9;
 `;
 
 const Title = styled.h2`

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { RecentRecipesCard } from "../RecentRecipesCard"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { api } from "../../../../lib/axios"
 
 const categories = [
     { id: 1, category: 'Salada' },
@@ -11,6 +12,26 @@ const categories = [
 
 export function RecentRecipes() {
     const [categorySelected, setCategorySelected] = useState(1)
+    const [recipes, setRecipes] = useState([])
+    const [filteredRecipes, setFilteredRecipes] = useState([])
+
+    useEffect(() => {
+        api.get('/recipe/all')
+        .then(res => {
+            setRecipes(res.data)
+            console.log(res.data)
+            setFilteredRecipes(res.data.filter(recipe => recipe.recipe_categories_id === 1))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
+
+    useEffect(() => {
+        setFilteredRecipes(recipes.filter(recipe => recipe.recipe_categories_id === categorySelected))
+    }, [categorySelected])
+
+
     return (
         <Container>
             <Title>Receitas recentes</Title>
@@ -26,10 +47,9 @@ export function RecentRecipes() {
                 ))}
             </CategoryList>
             <RecipesList>
-                <RecentRecipesCard />
-                <RecentRecipesCard />
-                <RecentRecipesCard />
-                <RecentRecipesCard />
+                {filteredRecipes.map(recipe => (
+                    <RecentRecipesCard key={recipe.id} data={recipe} />
+                ))}
             </RecipesList>
         </Container>
     )

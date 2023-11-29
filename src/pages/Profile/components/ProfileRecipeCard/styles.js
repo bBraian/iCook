@@ -67,9 +67,18 @@ export const SaveBoxIcon = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 `
 
 export const EditBoxIcon = styled(SaveBoxIcon)`
+    background-color: ${props => props.theme['white-0']};
+`
+
+export const IndicatorIcon = styled(SaveBoxIcon)`
     background-color: ${props => props.theme['white-0']};
 `
 

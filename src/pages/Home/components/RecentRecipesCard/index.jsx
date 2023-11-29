@@ -1,11 +1,12 @@
 import { Box, Container, Img, Title, UserCreator } from "./styles";
 
-export function RecentRecipesCard() {
+export function RecentRecipesCard({ data }) {
+    console.log(data)
     return (
-        <Container to="receita">
-            <Img src="https://guararapesonline.com.br/shoppingguararapes/2020/08/LB-laca-burguer.jpg" />
+        <Container to={`/receita/${data.id}`}>
+            <Img src={data.image} />
             <Box>
-                <Title>Hambúrguer de Frango</Title>
+                <Title>{data.name}</Title>
                 <UserCreator>Adrianna Curl</UserCreator>
             </Box>
         </Container>

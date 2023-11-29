@@ -6,9 +6,24 @@ import { useLocation, useParams } from "react-router-dom";
 import { api } from "../../lib/axios";
 import defautAvatar from "../../assets/avatar.png"
 import Loading from "../../components/Loading";
+import Swal from "sweetalert2";
+import TransparentLoading from "../../components/TransparentLoading";
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
 
 export function Profile() {
     const [isLoading, setIsLoading] = useState(true);
+    const [updating, setUpdating] = useState(false);
     const [originalUserData, setOriginalUserdata] = useState({})
     const [userData, setUserdata] = useState({})
     const { state } = useLocation();
@@ -43,8 +58,40 @@ export function Profile() {
     }
 
     function handleSaveProfile() {
-
+        setUpdating(true)
+        api.patch(`/user/${userId}`, {
+            name: userData.name,
+            description: userData.description
+        }).then(res => {
+            setUpdating(false)
+            setIsEditting(false)
+            console.log(res)
+            Toast.fire({
+                icon: "success",
+                title: "Usuário atualizado com sucesso"
+            });
+        }).catch(err => {
+            setUpdating(false)
+            setIsEditting(false)
+            Toast.fire({
+                icon: "error",
+                title: "Erro ao atualizar usuário"
+            });
+            console.log(err)
+        })
     }
+    
+    function removeSavedRecipe(id) {
+        const savedRecipes = [...userData.saved_recipes];
+    
+        const index = savedRecipes.findIndex((recipe) => recipe.id === id);
+    
+        if (index !== -1) {
+            savedRecipes.splice(index, 1);
+    
+            setUserdata({ ...userData, saved_recipes: savedRecipes });
+        }
+    };
 
     function cancelUserEdit() {
         setUserdata(originalUserData)
@@ -65,10 +112,10 @@ export function Profile() {
                     <Row>
                         <Avatar src={userData.avatar ? userData.avatar : defautAvatar} />
                         {isEditting ? (
-                            <>
-                                <CancelBtn onClick={cancelUserEdit}>Cancelar</CancelBtn>
+                            <div>
+                                <CancelBtn style={{marginRight: '8px'}} onClick={cancelUserEdit}>Cancelar</CancelBtn>
                                 <Button onClick={handleSaveProfile}>Salvar Perfil</Button>
-                            </>
+                            </div>
                         ) : (
                             <>
                                 {isMyProfile ? (
@@ -119,7 +166,7 @@ export function Profile() {
                             ) : (
                                 <RecipesList>
                                     {userData.saved_recipes != undefined && userData.saved_recipes.map(savedRecipes => (
-                                        <ProfileRecipeCard key={savedRecipes.id} data={savedRecipes} type={1} />
+                                        <ProfileRecipeCard key={savedRecipes.id} data={savedRecipes} type={1} removeSavedRecipe={removeSavedRecipe} />
                                     ))}
                                 </RecipesList>
                             )}
@@ -136,6 +183,7 @@ export function Profile() {
 
                 </RecipesContainer>
             </div>
+            {updating && <TransparentLoading />}
         </>
     )
 }

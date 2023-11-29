@@ -2,14 +2,15 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
 export const MenuContainer = styled.div`
-  position: fixed;
-  top: 76px;
-  right: 0;
-  height: 100%;
-  width: 68%;
-  padding: 10px 20px;
-  background-color: ${props => props.theme['primary-60']};
-  z-index: 99;
+    max-width: 400px;
+    position: fixed;
+    top: 76px;
+    right: 0;
+    height: 100%;
+    width: 68%;
+    padding: 10px 20px;
+    background-color: ${props => props.theme['primary-60']};
+    z-index: 99;
 `;
 
 export const Overlay = styled.div`

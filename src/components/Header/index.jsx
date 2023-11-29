@@ -42,7 +42,7 @@ export function Header() {
             <Box>
                 <SmallButton text="Nova receita" onClick={handleNavigateToCreateRecipe} icon={<BiPlus style={{color: '#EE8B8B', width: '20px', height: '20px'}} />} />
                 {user ? (
-                    <HeaderButton>
+                    <HeaderButton onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                         {user.avatar ? (
                             <Image src={user.avatar} />
                         ) : (
@@ -50,7 +50,7 @@ export function Header() {
                         )}
                     </HeaderButton>
                 ) : (
-                    <HeaderButton>
+                    <HeaderButton onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                         <HiOutlineUser style={{color: '#FFF', width: '30px', height: '30px'}} />
                     </HeaderButton>
                 )}
