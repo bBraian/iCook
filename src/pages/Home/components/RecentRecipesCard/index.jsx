@@ -1,7 +1,7 @@
 import { Box, Container, Img, Title, UserCreator } from "./styles";
 
 export function RecentRecipesCard({ data }) {
-    console.log(data)
+    // console.log(data)
     return (
         <Container to={`/receita/${data.id}`}>
             <Img src={data.image} />

@@ -68,7 +68,7 @@ export function CreateRecipe() {
             steps: [...stepsList],
         }
 
-        console.log(data)
+        // console.log(data)
 
         api.post('/recipe', data)
         .then((res) => {

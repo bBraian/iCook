@@ -39,3 +39,22 @@ export const SearchButton = styled.button`
     background-color: ${props => props.theme['primary-50']};
     border: 0;
 `
+
+export const FilterButton = styled(SearchButton)`
+    position: relative;
+`
+
+export const FilterCount = styled.div`
+    width: 25px;
+    height: 25px;
+    background-color: #F3B2B2;
+    color: #FFF;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+`

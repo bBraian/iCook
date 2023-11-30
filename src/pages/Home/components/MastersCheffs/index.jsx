@@ -14,7 +14,7 @@ export function MastersCheffs() {
         try {
             const {data} = await api.get('user/all')
             setMasterCheffs(data)
-            console.log(data)
+            // console.log(data)
         } catch (error) {
             console.log(error)   
         }
