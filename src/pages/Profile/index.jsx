@@ -171,6 +171,7 @@ export function Profile() {
 
                 </RecipesContainer>
             </div>
+            
             {updating && <TransparentLoading />}
         </>
     )

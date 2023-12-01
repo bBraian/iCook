@@ -63,51 +63,56 @@ export function ProfileRecipeCard({type, data, removeSavedRecipe}) {
         //     });
         // })
     }
+
+    function handleOpenModal(event) {
+        event.preventDefault();
+        setModalOpen(true)
+    }
     
     return (
-        <Container to={`/receita/${data.id}`}>
-            <Img src={data.image} />
-            <ShadowEffect />
-            <TopBox>
-                <Stars>
-                    <AiTwotoneStar style={{color: '#FFF', width: '16px', height: '16px'}} />
-                    <span>{isNaN(data.rating_sum / data.review_amount) ? 0 : data.rating_sum / data.review_amount}</span>
-                </Stars>
-                {type == 2 && (
-                    <IndicatorIcon>
-                        {data.private == 1 ? (
-                            <FaLock style={{color: '#E23E3E', width: '18px', height: '18px'}} />
-                        ) : (
-                            <FaUnlock style={{color: '#31B057', width: '18px', height: '18px'}} />
-                        )}
-                    </IndicatorIcon>
-                )}
-                {type == 1 &&  (
-                    <SaveBoxIcon onClick={(e) => handleUnsaveRecipe(e, data.id)}>
-                        <BsBookmarkDash style={{color: '#FFF', width: '18px', height: '18px'}} />
-                    </SaveBoxIcon>
-                )}
-                {type == 2 && (
-                    <EditBoxIcon onClick={() => setModalOpen(true)}>
-                        <BiDotsHorizontalRounded style={{color: '#E23E3E', width: '18px', height: '18px'}} />
-                    </EditBoxIcon>
-                )}
+        <>
+            <Container to={`/receita/${data.id}`}>
+                <Img src={data.image} />
+                <ShadowEffect />
+                <TopBox>
+                    <Stars>
+                        <AiTwotoneStar style={{color: '#FFF', width: '16px', height: '16px'}} />
+                        <span>{isNaN(data.rating_sum / data.review_amount) ? 0 : data.rating_sum / data.review_amount}</span>
+                    </Stars>
+                    {type == 2 && (
+                        <IndicatorIcon>
+                            {data.private == 1 ? (
+                                <FaLock style={{color: '#E23E3E', width: '18px', height: '18px'}} />
+                            ) : (
+                                <FaUnlock style={{color: '#31B057', width: '18px', height: '18px'}} />
+                            )}
+                        </IndicatorIcon>
+                    )}
+                    {type == 1 &&  (
+                        <SaveBoxIcon onClick={(e) => handleUnsaveRecipe(e, data.id)}>
+                            <BsBookmarkDash style={{color: '#FFF', width: '18px', height: '18px'}} />
+                        </SaveBoxIcon>
+                    )}
+                    {type == 2 && (
+                        <EditBoxIcon onClick={handleOpenModal}>
+                            <BiDotsHorizontalRounded style={{color: '#E23E3E', width: '18px', height: '18px'}} />
+                        </EditBoxIcon>
+                    )}
 
-                {type == 3 &&  (
-                    <SaveBoxIcon onClick={(e) => handleSaveUnsaveRecipe(e, data.id)}>
-                        <BsBookmarkDash style={{color: '#FFF', width: '18px', height: '18px'}} />
-                    </SaveBoxIcon>
-                )}
-
-                
-                
-            </TopBox>
-            <BottomBox>
-                <Title>{data.name}</Title>
-                <Infos>{data.ingredients_amount} Ingredientes | {data.kitchen_time}</Infos>
-            </BottomBox>
-            <EditRecipeModal setModalOpen={setModalOpen} modalOpen={modalOpen} />
-            {isSubmitting && <TransparentLoading />}
-        </Container>
+                    {type == 3 &&  (
+                        <SaveBoxIcon onClick={(e) => handleSaveUnsaveRecipe(e, data.id)}>
+                            <BsBookmarkDash style={{color: '#FFF', width: '18px', height: '18px'}} />
+                        </SaveBoxIcon>
+                    )}
+                    
+                </TopBox>
+                <BottomBox>
+                    <Title>{data.name}</Title>
+                    <Infos>{data.ingredients_amount} Ingredientes | {data.kitchen_time}</Infos>
+                </BottomBox>
+                {isSubmitting && <TransparentLoading />}
+            </Container>
+            <EditRecipeModal setModalOpen={setModalOpen} modalOpen={modalOpen} recipeData={data} />
+        </>
     )
 }

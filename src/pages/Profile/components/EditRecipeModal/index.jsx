@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { AiOutlineClose } from "react-icons/ai"
 
-export function EditRecipeModal({setModalOpen, modalOpen}) {
+export function EditRecipeModal({setModalOpen, modalOpen, recipeData}) {
 
     if(!modalOpen) {
         return ""
@@ -10,15 +10,15 @@ export function EditRecipeModal({setModalOpen, modalOpen}) {
     return (
         <>
             <Container>
-                <CloseButton onClick={() => setModalOpen(false)}>
+                <CloseButton type="button" onClick={() => setModalOpen(false)}>
                     <AiOutlineClose style={{color: '#E23E3E', width: '22px', height: '22px'}} />
                 </CloseButton>
-                <Description>Como fazer italiano Espaguete em casa</Description>
+                <Description>{recipeData.name}</Description>
                 <Buttons>
-                    <LinkButton to="criar-receita">
+                    <LinkButton type="button" to={'/criar-receita'}>
                         Editar
                     </LinkButton>
-                    <Button primary={true}>
+                    <Button type="button" primary={true}>
                         Excluir
                     </Button>
                 </Buttons>
@@ -66,6 +66,7 @@ const Description = styled.span`
     line-height: 140%;
 `
 const Container = styled.div`
+    max-width: 700px;
     position: fixed;
     display: flex;
     gap: 25px;
