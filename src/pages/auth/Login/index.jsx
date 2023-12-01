@@ -3,21 +3,9 @@ import { LargeButton } from "../../../components/LargeButton";
 import { Container, ForgotPassword, Input, Label, LoginForm, SignUpLink, Title } from "./styles";
 import { useContext, useState } from "react";
 import { api } from "../../../lib/axios";
-import Swal from "sweetalert2";
 import { AuthContext } from "../../../context/AuthContext";
 import TransparentLoading from "../../../components/TransparentLoading";
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  }
-});
+import { Toast } from "../../../lib/toast";
 
 export function Login() {
   const [email, setEmail] = useState('')

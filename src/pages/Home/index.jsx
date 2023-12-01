@@ -7,10 +7,13 @@ import { MastersCheffs } from "./components/MastersCheffs";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Loading from "../../components/Loading";
+import { SearchList } from "./components/SearchList";
 
 export function Home() {
     const { loading } = useContext(AuthContext)
     const [filter, setFilter] = useState({ category: '0', type: '0', ingredient: [], serves: '0' })
+    const [textFilter, setTextFilter] = useState('')
+    const [isSearch, setIsSearch] = useState(false)
     
     console.log(filter)
 
@@ -22,12 +25,19 @@ export function Home() {
 
     return (
         <>
-            <Header />
-            <Search filter={filter} setFilter={setFilter} />
+            <Header setIsSearch={setIsSearch} />
+            <Search filter={filter} setFilter={setFilter} setIsSearch={setIsSearch} textFilter={textFilter} setTextFilter={setTextFilter} />
             <Body>
-                <Trending />
-                <RecentRecipes />
-                <MastersCheffs />
+                {isSearch ? (
+                    <SearchList filter={filter} textFilter={textFilter} isSearch={isSearch} />
+                ) : (
+                    <>
+                        <Trending />
+                        <RecentRecipes />
+                        <MastersCheffs />
+                    </>
+                )}
+                
             </Body>
         </>
     )

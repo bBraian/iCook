@@ -7,6 +7,7 @@ import { Recipe } from './pages/Recipe';
 import { Profile } from './pages/Profile';
 import { InDevelopment } from './pages/error/InDevelopment';
 import { CreateRecipe } from './pages/CreateRecipe';
+import { CreateIngredient } from './pages/CreateIngredient';
 
 export function Router() {
     return (
@@ -15,6 +16,7 @@ export function Router() {
             <Route path='/login' element={<Login />} />
             <Route path='/receita/:recipeId' element={<Recipe />} />
             <Route path='/criar-receita' element={<CreateRecipe />} />
+            <Route path='/criar-ingrediente' element={<CreateIngredient />} />
             <Route path='/profile/:userId' element={<Profile />} />
             <Route path='/register' element={ <Register /> } />
             <Route path='/in-development' element={ <InDevelopment /> } />

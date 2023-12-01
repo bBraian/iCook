@@ -6,20 +6,8 @@ import { useLocation, useParams } from "react-router-dom";
 import { api } from "../../lib/axios";
 import defautAvatar from "../../assets/avatar.png"
 import Loading from "../../components/Loading";
-import Swal from "sweetalert2";
 import TransparentLoading from "../../components/TransparentLoading";
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    }
-  });
+import { Toast } from "../../lib/toast";
 
 export function Profile() {
     const [isLoading, setIsLoading] = useState(true);

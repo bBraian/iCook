@@ -11,7 +11,7 @@ import defaultImg from '../../assets/avatar.png'
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export function Header() {
+export function Header({setIsSearch}) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -38,7 +38,7 @@ export function Header() {
 
     return (
         <Container>
-            <Title to="/">iCook</Title>
+            <Title to="/" onClick={() => setIsSearch(false)}>iCook</Title>
             <Box>
                 <SmallButton text="Nova receita" onClick={handleNavigateToCreateRecipe} icon={<BiPlus style={{color: '#EE8B8B', width: '20px', height: '20px'}} />} />
                 {user ? (

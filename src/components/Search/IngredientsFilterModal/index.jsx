@@ -3,12 +3,14 @@ import { AiOutlineClose } from "react-icons/ai"
 import { FaPlus } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { api } from "../../../lib/axios";
+import TransparentLoading from "../../TransparentLoading";
 
 export function IngredientsFilterModal({setModalOpen, modalOpen, filter, setFilter}) {
     const [selected, setSelected] = useState({})
     const [search, setSearch] = useState('')
     const [filteredIngredients, setFilteredIngredients] = useState({})
     const [ingredients, setIngredients] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         getIngredients()
     }, [])
@@ -16,6 +18,7 @@ export function IngredientsFilterModal({setModalOpen, modalOpen, filter, setFilt
     async function getIngredients() {
         const { data } = await api.get('ingredients/all')
         setIngredients(data)
+        setIsLoading(false)
     }
 
     function handleCloseModal() {
@@ -36,16 +39,25 @@ export function IngredientsFilterModal({setModalOpen, modalOpen, filter, setFilt
     }
 
     function handleAddIngredient() {
-        const olderIngredients = filter.ingredient;
-        const alreadyExist = olderIngredients.find(object => object.id === selected.id);
-        if(!alreadyExist) {
-            setFilter({ ...filter, ingredient: [...olderIngredients, selected] })
+        if(selected.length > 0) {
+            const olderIngredients = filter.ingredient;
+            const alreadyExist = olderIngredients.find(object => object.id === selected.id);
+            if(!alreadyExist) {
+                setFilter({ ...filter, ingredient: [...olderIngredients, selected] })
+            }   
         }
+        
         handleCloseModal()
     }
 
     if(modalOpen == false) {
         return ""
+    }
+
+    if(isLoading) {
+        return (
+            <TransparentLoading />
+        )
     }
 
     return (
@@ -72,13 +84,13 @@ export function IngredientsFilterModal({setModalOpen, modalOpen, filter, setFilt
                                     ))}
                                 </>
                             ) : (
-                                <>  
+                                <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>  
                                     <NotFound>Ingrediente não encontrado</NotFound>
                                     <CreateNewButton>
                                         <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
                                         Criar novo ingrediente
                                     </CreateNewButton>
-                                </>
+                                </div>
                             )}
                          
                         </>
@@ -96,7 +108,7 @@ export function IngredientsFilterModal({setModalOpen, modalOpen, filter, setFilt
                     
                 </IngredientsList>
                 <Box>
-                    <ConfirmButton type="button" onClick={handleAddIngredient}>Adicionar ingrediente</ConfirmButton>
+                    <ConfirmButton type="button" onClick={handleAddIngredient} disabled={search ? !filteredIngredients.length > 0 ? !selected.length > 0 ? true : false : false : false}>Adicionar ingrediente</ConfirmButton>
                 </Box>
             </Container>
             <Overlay onClick={handleCloseModal} />
@@ -244,4 +256,10 @@ const ConfirmButton = styled.button`
     font-size: 14px;
     font-weight: 600;
     line-height: 19.60px;
+
+    &:disabled {
+        border: 1px solid ${props => props.theme['neutral-40']};
+        color: ${props => props.theme['neutral-50']};
+        cursor: not-allowed;
+    }
 `;

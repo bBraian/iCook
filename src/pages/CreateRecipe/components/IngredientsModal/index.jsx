@@ -3,11 +3,13 @@ import { AiOutlineClose } from "react-icons/ai"
 import { FaPlus } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { api } from "../../../../lib/axios";
+import { Link } from "react-router-dom";
 
 export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected}) {
     const [search, setSearch] = useState('')
     const [filteredIngredients, setFilteredIngredients] = useState({})
     const [ingredients, setIngredients] = useState({})
+    const [showConfirmButton, setShowConfirmButton] = useState({})
     console.log(selected)
     useEffect(() => {
         getIngredients()
@@ -28,6 +30,13 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
         if(search) {
             let filter = ingredients.filter(ingredient => ingredient.name.toLowerCase().includes(search.toLowerCase()))
             setFilteredIngredients(filter.length > 0 ? filter : {})
+            if(!filter.length > 0) {
+                setShowConfirmButton(false)
+            } else {
+                setShowConfirmButton(true)
+            }
+        } else {
+            setShowConfirmButton(true)
         }
     }, [search])
 
@@ -63,13 +72,13 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
                                     ))}
                                 </>
                             ) : (
-                                <>  
+                                <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
                                     <NotFound>Ingrediente não encontrado</NotFound>
-                                    <CreateNewButton>
-                                        <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
-                                        Criar novo ingrediente
+                                    <CreateNewButton to="/criar-ingrediente">
+                                            <FaPlus style={{color: '#EE8B8B', width: '14px', height: '14px'}} />
+                                            Criar novo ingrediente
                                     </CreateNewButton>
-                                </>
+                                </div>
                             )}
                          
                         </>
@@ -86,9 +95,11 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
                     )}
                     
                 </IngredientsList>
-                <Box>
-                    <ConfirmButton type="button" onClick={handleCloseModal}>Confirmar ingrediente</ConfirmButton>
-                </Box>
+                {showConfirmButton &&
+                    <Box>
+                        <ConfirmButton type="button" onClick={handleCloseModal} disabled={selected.id == 1 ? true : false}>Confirmar ingrediente</ConfirmButton>
+                    </Box>
+                }
             </Container>
             <Overlay onClick={handleCloseModal} />
         </>
@@ -118,7 +129,7 @@ const SearchInput = styled.input`
     margin: 3px 10px 0 10px;
 `
 
-const CreateNewButton = styled.button`
+const CreateNewButton = styled(Link)`
     display: flex;
     align-items: center;
     gap: 6px;
@@ -235,4 +246,10 @@ const ConfirmButton = styled.button`
     font-size: 14px;
     font-weight: 600;
     line-height: 19.60px;
+
+    &:disabled {
+        border: 1px solid ${props => props.theme['neutral-40']};
+        color: ${props => props.theme['neutral-50']};
+        cursor: not-allowed;
+    }
 `;

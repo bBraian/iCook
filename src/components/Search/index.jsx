@@ -3,9 +3,10 @@ import { FiSearch } from "react-icons/fi"
 import { FaFilter } from "react-icons/fa";
 import { FilterModal } from "./FilterModal";
 import { useEffect, useState } from "react";
+import { Toast } from "../../lib/toast";
 
-export function Search({filter, setFilter}) {
-    const [modalOpen, setModalOpen] = useState(true)
+export function Search({filter, setFilter, setIsSearch, textFilter, setTextFilter}) {
+    const [modalOpen, setModalOpen] = useState(false)
     const [filterAmount, setFilterAmount] = useState(0)
 
     useEffect(() => {
@@ -25,11 +26,22 @@ export function Search({filter, setFilter}) {
 
         setFilterAmount(counter)
     }, [filter])
+    
+    function handleSearch() {
+        if(filterAmount == 0 && textFilter == "") {
+            Toast.fire({
+                icon: "warning",
+                title: "Escreva ou selecione algum filtro"
+            });
+        } else {
+            setIsSearch(true)
+        }
+    }
 
     return (
         <Container>
-            <Input type="text" placeholder="Pesquisar receitas" />
-            <SearchButton>
+            <Input type="text" placeholder="Pesquisar receitas" value={textFilter} onChange={(e) => setTextFilter(e.target.value)} />
+            <SearchButton type="button" onClick={handleSearch}>
                 <FiSearch style={{color: '#FFF', width: '20px', height: '20px'}} />
             </SearchButton>
             <FilterButton onClick={() => setModalOpen(true)}>

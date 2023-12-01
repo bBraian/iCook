@@ -6,18 +6,7 @@ import Swal from "sweetalert2";
 import { api } from "../../../lib/axios";
 import { useNavigate } from "react-router-dom";
 import TransparentLoading from "../../../components/TransparentLoading";
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  }
-});
+import { Toast } from "../../../lib/toast";
 
 export function Register() {
   const [avatar, setAvatar] = useState()

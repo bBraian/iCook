@@ -38,6 +38,11 @@ export const SearchButton = styled.button`
     border-radius: 10px;
     background-color: ${props => props.theme['primary-50']};
     border: 0;
+    transition: background-color ease-in-out 0.2s;
+
+    &:hover {
+        background-color: ${props => props.theme['primary-60']};
+    }
 `
 
 export const FilterButton = styled(SearchButton)`
