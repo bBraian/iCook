@@ -60,12 +60,12 @@ export const SaveBoxIcon = styled.button`
     height: 32px;
     border: 0;
     cursor: pointer;
-    background-color: ${props => props.theme['white-0']};
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.2s ease-in-out;
+    background-color: ${props => props.saved == 'S' ? props.theme['primary-50'] : props.theme['white-0']};
 
     &:hover {
         transform: scale(1.1);

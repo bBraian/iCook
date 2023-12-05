@@ -29,7 +29,6 @@ export function SearchCard({ data }) {
             });
         } else {
             api.post('/user/bookmark-recipe')
-            console.log('bookmark', recipeId);
         }
     }
     return (

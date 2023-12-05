@@ -10,7 +10,6 @@ export function IngredientsModal({setModalOpen, modalOpen, selected, setSelected
     const [filteredIngredients, setFilteredIngredients] = useState({})
     const [ingredients, setIngredients] = useState({})
     const [showConfirmButton, setShowConfirmButton] = useState({})
-    console.log(selected)
     useEffect(() => {
         getIngredients()
     }, [])

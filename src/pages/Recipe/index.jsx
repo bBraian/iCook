@@ -134,7 +134,7 @@ export function Recipe() {
                 <Row>
                     <Title>{recipe.name}</Title>
                     <BookmarkButton saved={saved} type="button" onClick={handleSaveUnsaveRecipe}>
-                        <BsBookmarkDash style={{color: recipe.saved ? '#FFF' : '#EE8B8B', width: '22px', height: '22px'}} />
+                        <BsBookmarkDash style={{color: recipe.saved == 'S' ? '#FFF' : '#EE8B8B', width: '22px', height: '22px'}} />
                     </BookmarkButton>
                 </Row>
                 <ImgContainer>

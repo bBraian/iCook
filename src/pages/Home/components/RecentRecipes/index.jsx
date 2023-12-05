@@ -19,7 +19,6 @@ export function RecentRecipes() {
         api.get('/recipe/all')
         .then(res => {
             setRecipes(res.data)
-            // console.log(res.data)
             setFilteredRecipes(res.data.filter(recipe => recipe.recipe_categories_id === 1))
         })
         .catch(err => {

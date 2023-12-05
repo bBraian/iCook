@@ -5,21 +5,22 @@ import { useEffect, useState } from "react";
 import { api } from "../../../../lib/axios";
 import defaultImage from "../../../../assets/avatar.png"
 
-export function SearchList() {
-    const [trending, setTrending] = useState([])
+export function SearchList({textFilter, filter}) {
+    const [search, setSearch] = useState([])
 
     useEffect(() => {
-        getTrending()
-    }, [])
+        getSearch({...filter, name: textFilter})
+    }, [textFilter, filter])
 
-    async function getTrending() {
+    async function getSearch(filterData) {
+        console.log(filterData)
         const { data } = await api.get('recipe/trending')
-        setTrending(data)
+        setSearch(data)
     }
     return (
         <Container>
             <CardList>
-                {trending.map(recipe => (
+                {search.map(recipe => (
                     <TrendingCardBox key={recipe.id}>
                         <SearchCard data={recipe} />
                         <Creator to={`profile/${recipe.user_id}`}>

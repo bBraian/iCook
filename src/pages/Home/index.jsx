@@ -4,7 +4,7 @@ import { Search } from "../../components/Search";
 import { Trending } from "./components/Trending";
 import { RecentRecipes } from "./components/RecentRecipes";
 import { MastersCheffs } from "./components/MastersCheffs";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Loading from "../../components/Loading";
 import { SearchList } from "./components/SearchList";
@@ -14,8 +14,6 @@ export function Home() {
     const [filter, setFilter] = useState({ category: '0', type: '0', ingredient: [], serves: '0' })
     const [textFilter, setTextFilter] = useState('')
     const [isSearch, setIsSearch] = useState(false)
-    
-    console.log(filter)
 
     if(loading) {
         return (

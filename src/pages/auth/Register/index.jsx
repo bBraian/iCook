@@ -60,7 +60,7 @@ export function Register() {
     api.post('/user', { name: form.name, email: form.email, password: form.password })
     .then((response) => {
       setIsLoading(false)
-      console.log(response)
+      // console.log(response)
       if(response.status === 201) {
         Swal.fire({
           title: "Usuário criado com sucesso!",

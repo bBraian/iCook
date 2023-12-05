@@ -34,7 +34,6 @@ export function Profile() {
 
     async function getUser() {
         const { data } = await api.get(`user/${userId}`)
-        // console.log(data)
         setUserdata(data)
         if(data.is_me) {
             setIsMyProfile(true)

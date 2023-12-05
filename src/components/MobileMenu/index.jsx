@@ -66,15 +66,15 @@ export function MobileMenu({ isOpen, onClose }) {
         {user ? (
           <>
             <MenuItems>
-              <MenuItem to="/profile/1">
+              <MenuItem to={`/profile/${user.id}`}>
                 <HiOutlineUser style={{color: '#FFF', width: '30px', height: '30px'}} />
                 <MenuText>Meu perfil</MenuText>
               </MenuItem>
-              <MenuItem to="/profile/1" state={{ activeButton: 1, user: 0 }}>
+              <MenuItem to={`/profile/${user.id}`} state={{ activeButton: 1, user: 0 }}>
                 <BsBookmarkDash style={{color: '#FFF', width: '30px', height: '30px'}} />
                 <MenuText>Receitas salvas</MenuText>
               </MenuItem>
-              <MenuItem to="/profile/1" state={{ activeButton: 2, user: 0 }}>
+              <MenuItem to={`/profile/${user.id}`} state={{ activeButton: 2, user: 0 }}>
                 <BsFillFileEarmarkTextFill style={{color: '#FFF', width: '30px', height: '30px'}} />
                 <MenuText>Minhas receitas</MenuText>
               </MenuItem>

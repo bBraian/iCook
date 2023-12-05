@@ -87,7 +87,7 @@ export function FilterModal({setModalOpen, modalOpen, filter, setFilter}) {
                     
                 </ServesCounterList>
                 <ButtonBox>
-                    <LargeButton text="Aplicar" config="primary" type="button" />
+                    <LargeButton text="Aplicar" config="primary" type="button" onClick={() => setModalOpen(false)} />
                     <LargeButton 
                         text="Remover" 
                         config="secondary" 

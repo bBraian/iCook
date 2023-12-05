@@ -20,7 +20,7 @@ export function Login() {
     api.post('/login', { email, password })
     .then((response) => {
       setIsLoadingAuth(false)
-      console.log(response)
+      // console.log(response)
       if(response.status === 200) {
         signIn(response.data.access_token)
         .then((res) => {

@@ -3,7 +3,7 @@ import { AiTwotoneStar } from "react-icons/ai"
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsBookmarkDash } from "react-icons/bs"
 import { EditRecipeModal } from "../EditRecipeModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TransparentLoading from "../../../../components/TransparentLoading";
 import { api } from "../../../../lib/axios";
 import { Toast } from "../../../../lib/toast";
@@ -12,7 +12,14 @@ import { FaUnlock } from "react-icons/fa";
 
 export function ProfileRecipeCard({type, data, removeSavedRecipe}) {
     const [modalOpen, setModalOpen] = useState(false)
+    const [saved, setSaved] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
+
+    useEffect(() => {
+        if(type == 3) {
+            setSaved(data.saved)
+        }
+    }, [data])
 
     if(data == undefined) {
         return <></>
@@ -100,8 +107,8 @@ export function ProfileRecipeCard({type, data, removeSavedRecipe}) {
                     )}
 
                     {type == 3 &&  (
-                        <SaveBoxIcon onClick={(e) => handleSaveUnsaveRecipe(e, data.id)}>
-                            <BsBookmarkDash style={{color: '#FFF', width: '18px', height: '18px'}} />
+                        <SaveBoxIcon saved={saved ? 'S' : 'N'} type="button" onClick={(e) => handleSaveUnsaveRecipe(e, data.id)}>
+                            <BsBookmarkDash style={{color: saved ? '#FFF' : '#EE8B8B', width: '18px', height: '18px'}} />
                         </SaveBoxIcon>
                     )}
                     

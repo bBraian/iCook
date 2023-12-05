@@ -39,7 +39,7 @@ export function IngredientsFilterModal({setModalOpen, modalOpen, filter, setFilt
     }
 
     function handleAddIngredient() {
-        if(selected.length > 0) {
+        if(selected.id != undefined) {
             const olderIngredients = filter.ingredient;
             const alreadyExist = olderIngredients.find(object => object.id === selected.id);
             if(!alreadyExist) {

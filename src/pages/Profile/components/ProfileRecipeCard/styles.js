@@ -57,17 +57,16 @@ export const Stars = styled.div`
 `
 
 export const SaveBoxIcon = styled.button`
-    border: 0;
     width: 32px;
     height: 32px;
     border: 0;
     cursor: pointer;
-    background-color: ${props => props.theme['primary-50']};
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.2s ease-in-out;
+    background-color: ${props => props.saved == 'S' ? props.theme['primary-50'] : props.theme['white-0']};
 
     &:hover {
         transform: scale(1.1);
