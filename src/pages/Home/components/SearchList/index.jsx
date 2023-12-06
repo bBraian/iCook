@@ -14,7 +14,7 @@ export function SearchList({textFilter, filter}) {
 
     async function getSearch(filterData) {
         console.log(filterData)
-        const { data } = await api.get('recipe/trending')
+        const { data } = await api.get('recipe/search', filterData)
         setSearch(data)
     }
     return (

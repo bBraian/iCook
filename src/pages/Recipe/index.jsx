@@ -32,7 +32,7 @@ export function Recipe() {
 
     async function getRecipe() {
         const { data } = await api.get(`recipe/${recipeId}`)
-        // console.log(data)
+        console.log(data)
         setRecipe(data)
         setSaved(data.saved ? 'S' : 'N')
         if(data.rated) {
